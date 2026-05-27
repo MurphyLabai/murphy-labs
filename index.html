@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Murphy Labs — AI-Powered Randomness Tools</title>
+  <meta name="description" content="Free AI-powered random tools: slot selectors, dice rollers, coin tosses, card flips, and more. Upgrade to unlock custom uploads.">
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c49b30;
+      --gold-light: #e8c84a;
+      --gold-border: #d4af37;
+      --bg: #f4f5f8;
+      --surface: #ffffff;
+      --card: #ffffff;
+      --card-border: #e2e4ea;
+      --text: #1a1a2e;
+      --text-secondary: #4a4a6a;
+      --muted: #8a8aa0;
+      --accent-blue: #3a6ef5;
+      --cat-purple: #7c6fff;
+      --cat-blue: #3a6ef5;
+      --cat-gold: #d4af37;
+      --cat-soon: #9a9ab0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body.iframe-open { overflow: hidden; }
+
+    a { text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    hr.divider { border: none; border-top: 1px solid var(--card-border); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(124,111,255,0.3); }
+      50% { box-shadow: 0 0 40px rgba(124,111,255,0.6); }
+    }
+    .animate-in { animation: fadeInUp 0.6s ease forwards; }
+
+    /* ─── NAV ─── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 48px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 32px;
+      height: 32px;
+    }
+    .nav-logo-text {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .nav-logo-text span { color: var(--gold); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .btn-login {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1.5px solid var(--card-border);
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-login:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-register {
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(196,155,48,0.25);
+    }
+    .btn-register:hover { background: #b88a28; transform: translateY(-1px); }
+    .btn-pro-badge {
+      background: linear-gradient(135deg, var(--cat-purple), #5a4ff5);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(124,111,255,0.35);
+    }
+    .btn-pro-badge:hover { transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 80px 48px 70px;
+      max-width: 1300px;
+      margin: 0 auto;
+      background: linear-gradient(160deg, #fafbfc 0%, #f0f1f5 100%);
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(196,155,48,0.25);
+      color: var(--gold);
+      font-size: 0.62rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      font-family: 'Audiowide', sans-serif;
+    }
+    .hero-left h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    .hero-left h1 span {
+      background: linear-gradient(135deg, var(--cat-purple), #9f8fff, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+    }
+    .hero-left p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 440px;
+      margin-bottom: 28px;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cat-purple), #5a4ff5);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+      box-shadow: 0 4px 16px rgba(124,111,255,0.35);
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(124,111,255,0.5); }
+    .btn-gold {
+      background: var(--gold);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+      box-shadow: 0 4px 16px rgba(196,155,48,0.3);
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-gold:hover { background: #b88a28; transform: translateY(-1px); }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .hero-stat {
+      background: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px 12px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .hero-stat .big {
+      font-family: 'Audiowide', sans-serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .hero-stat .label {
+      font-size: 0.6rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .hero-stat.highlight {
+      background: rgba(196,155,48,0.06);
+      border-color: rgba(196,155,48,0.25);
+    }
+
+    /* ─── CATEGORY SECTIONS ─── */
+    .cat-section {
+      padding: 56px 48px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .cat-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .cat-label-row { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+    .cat-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .cat-label-text {
+      font-family: 'Audiowide', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .cat-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 4px; }
+    .cat-sub { font-size: 0.82rem; color: var(--text-secondary); }
+    .cat-viewall {
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(196,155,48,0.3);
+      padding-bottom: 1px;
+    }
+    .cat-viewall:hover { color: #b88a28; }
+
+    /* Horizontal scroll row */
+    .cat-scroll {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(196,155,48,0.3) transparent;
+    }
+    .cat-scroll::-webkit-scrollbar { height: 5px; }
+    .cat-scroll::-webkit-scrollbar-track { background: transparent; }
+    .cat-scroll::-webkit-scrollbar-thumb { background: rgba(196,155,48,0.3); border-radius: 3px; }
+
+    /* App card */
+    .app-card {
+      flex-shrink: 0;
+      width: 220px;
+      background: var(--surface);
+      border: 1.5px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.25s;
+      text-decoration: none;
+      display: block;
+    }
+    .app-card:hover {
+      border-color: rgba(124,111,255,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.1), 0 4px 12px rgba(124,111,255,0.1);
+    }
+    .app-card:hover .app-thumb { transform: scale(1.03); }
+    .app-card.coming-soon { opacity: 0.6; cursor: default; }
+    .app-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--card-border); }
+    .app-thumb-wrap {
+      position: relative;
+      height: 140px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a2e, #2d2d5a);
+    }
+    .app-thumb { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .app-cat-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      border: 1.5px solid rgba(255,255,255,0.6);
+    }
+    .app-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-family: 'Audiowide', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+    .app-badge.free { background: rgba(40,200,64,0.9); color: #fff; }
+    .app-badge.pro { background: rgba(124,111,255,0.9); color: #fff; }
+    .app-badge.coming { background: rgba(100,100,130,0.9); color: #fff; }
+    .app-body { padding: 14px 16px 16px; }
+    .app-name { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 6px; line-height: 1.3; }
+    .app-features { display: flex; flex-direction: column; gap: 3px; }
+    .app-feature {
+      font-size: 0.68rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .app-feature .check { color: var(--gold); font-weight: 700; }
+    .app-feature.locked { color: var(--muted); }
+    .app-feature .lock { color: var(--muted); }
+    .app-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px 14px;
+      border-top: 1px solid var(--card-border);
+    }
+    .app-use-free {
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .app-upgrade {
+      font-size: 0.68rem;
+      color: var(--cat-purple);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .app-card.coming-soon .app-use-free { color: var(--muted); }
+
+    /* ─── APP VIEWER (IFRAME OVERLAY) ─── */
+    #app-viewer {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 300;
+      display: none;
+      flex-direction: column;
+    }
+    #app-viewer.open { display: flex; }
+    .viewer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      z-index: 10;
+      flex-shrink: 0;
+    }
+    .viewer-left { display: flex; align-items: center; gap: 16px; }
+    .viewer-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1.5px solid var(--card-border);
+      color: var(--text-secondary);
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .viewer-back:hover { border-color: var(--text); color: var(--text); }
+    .viewer-app-name {
+      font-family: 'Audiowide', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text);
+      letter-spacing: 1px;
+    }
+    .viewer-badge {
+      font-size: 0.6rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+    .viewer-badge.free { background: rgba(40,200,64,0.1); color: #28c840; border: 1px solid rgba(40,200,64,0.2); }
+    .viewer-badge.pro { background: rgba(124,111,255,0.1); color: var(--cat-purple); border: 1px solid rgba(124,111,255,0.2); }
+    .viewer-right { display: flex; align-items: center; gap: 12px; }
+    .viewer-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+    .viewer-user-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cat-purple), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    #app-iframe {
+      flex: 1;
+      border: none;
+      width: 100%;
+      background: #fff;
+    }
+
+    /* ─── AUTH MODAL ─── */
+    #auth-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    #auth-modal.open { display: flex; }
+    .auth-box {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 40px 44px;
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    .auth-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .auth-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .auth-sub {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+    }
+    .auth-tabs { display: flex; gap: 0; margin-bottom: 28px; border-bottom: 2px solid var(--card-border); }
+    .auth-tab {
+      padding: 10px 24px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+    }
+    .auth-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .auth-field {
+      margin-bottom: 16px;
+    }
+    .auth-field label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+    .auth-field input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--card-border);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .auth-field input:focus { border-color: var(--gold); }
+    .auth-btn-main {
+      width: 100%;
+      padding: 12px;
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.2s;
+    }
+    .auth-btn-main:hover { background: #b88a28; }
+    .auth-divider { text-align: center; font-size: 0.72rem; color: var(--muted); margin: 16px 0; position: relative; }
+    .auth-divider::before, .auth-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: var(--card-border);
+    }
+    .auth-divider::before { left: 0; }
+    .auth-divider::after { right: 0; }
+    .auth-social {
+      display: flex;
+      gap: 10px;
+    }
+    .auth-social-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px;
+      border: 1.5px solid var(--card-border);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--surface);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .auth-social-btn:hover { border-color: var(--gold); }
+    .auth-pro-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 16px;
+    }
+    .auth-pro-note a { color: var(--cat-purple); font-weight: 600; }
+
+    /* ─── DIVIDER ─── */
+    .section-divider { max-width: 1300px; margin: 0 auto; padding: 0 48px; }
+
+    /* ─── FEATURE BANNER ─── */
+    .feature-banner {
+      background: linear-gradient(135deg, #1a1a2e 0%, #2d2d5a 100%);
+      padding: 60px 48px;
+      text-align: center;
+    }
+    .feature-banner h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .feature-banner h2 span { color: var(--gold); }
+    .feature-banner p { color: rgba(255,255,255,0.6); font-size: 0.88rem; margin-bottom: 28px; }
+    .feature-pills { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .feature-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 8px 18px;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+    .feature-pill .icon { font-size: 0.9rem; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.5);
+      padding: 50px 48px 30px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+      max-width: 1300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .footer-brand-logo {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .footer-brand p { font-size: 0.75rem; line-height: 1.7; max-width: 280px; }
+    .footer-col h5 {
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: 'Audiowide', sans-serif;
+      margin-bottom: 14px;
+    }
+    .footer-col a { display: block; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.78rem; margin-bottom: 9px; transition: color 0.2s; }
+    .footer-col a:hover { color: rgba(255,255,255,0.9); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 20px;
+      max-width: 1300px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p { font-size: 0.72rem; }
+    .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.72rem; margin-left: 20px; }
+    .footer-bottom a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 12px 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 36px; padding: 50px 24px 50px; }
+      .cat-section { padding: 40px 24px; }
+      .cat-scroll { gap: 12px; }
+      .app-card { width: 190px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; gap: 10px; }
+      .section-divider { padding: 0 24px; }
+    }
+    @media (max-width: 600px) {
+      .hero-stats { grid-template-columns: repeat(3, 1fr); }
+      .app-card { width: 170px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .viewer-bar { padding: 10px 16px; }
+    }
+
+    /* ─── UPGRADE BANNER (shown in app when free) ─── */
+    #upgrade-banner {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, rgba(26,26,46,0.97), rgba(45,45,90,0.97));
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(124,111,255,0.3);
+      padding: 14px 24px;
+      z-index: 310;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    #upgrade-banner.show { display: flex; }
+    .upgrade-left { display: flex; align-items: center; gap: 14px; }
+    .upgrade-icon { font-size: 1.4rem; }
+    .upgrade-text { color: #fff; }
+    .upgrade-text strong { font-size: 0.88rem; display: block; margin-bottom: 2px; }
+    .upgrade-text span { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
+    .upgrade-btn {
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .upgrade-btn:hover { background: #b88a28; }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#" class="nav-logo" onclick="closeViewer(); return false;">
+    <svg class="nav-logo-icon" viewBox="0 0 32 32" fill="none">
+      <rect width="32" height="32" rx="8" fill="url(#g)"/>
+      <text x="16" y="22" text-anchor="middle" font-family="Audiowide,sans-serif" font-size="14" fill="#fff">M</text>
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="32" y2="32">
+          <stop offset="0%" stop-color="#7c6fff"/>
+          <stop offset="100%" stop-color="#d4af37"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span class="nav-logo-text">MURPHY<span>LABS</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#random-picker">Random Picker</a>
+    <a href="#simulation">Simulation</a>
+    <a href="#giveaway">Giveaway Tools</a>
+    <a href="#coming-soon">Coming Soon</a>
+  </div>
+  <div class="nav-actions">
+    <a href="#" class="btn-login" onclick="openAuth('login')">Sign In</a>
+    <a href="#" class="btn-register" onclick="openAuth('register')">Register</a>
+    <a href="#" class="btn-pro-badge" onclick="openAuth('register')">PRO $4.99/mo</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-left animate-in">
+    <div class="hero-badge">✦ Free AI-Powered Tools</div>
+    <h1>Randomness,<br><span>Supercharged.</span></h1>
+    <p>Slot selectors, dice rollers, coin flips, card draws — all free to use. Upload your own music, images, and themes with a Pro subscription.</p>
+    <div class="hero-actions">
+      <a href="#random-picker" class="btn-primary">Explore Tools</a>
+      <a href="#giveaway" class="btn-gold">Giveaway Suite</a>
+    </div>
+  </div>
+  <div class="hero-right animate-in" style="animation-delay: 0.2s;">
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="big">4</span>
+        <span class="label">Free Apps</span>
+      </div>
+      <div class="hero-stat">
+        <span class="big">12+</span>
+        <span class="label">Coming Soon</span>
+      </div>
+      <div class="hero-stat highlight">
+        <span class="big">100%</span>
+        <span class="label">Free Access</span>
+      </div>
+      <div class="hero-stat">
+        <span class="big">∞</span>
+        <span class="label">Generations</span>
+      </div>
+      <div class="hero-stat highlight">
+        <span class="big">PRO</span>
+        <span class="label">$4.99/mo</span>
+      </div>
+      <div class="hero-stat">
+        <span class="big">0</span>
+        <span class="label">Signup Required</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider section-divider">
+
+<!-- ─── RANDOM PICKER APPS ─── -->
+<section class="cat-section" id="random-picker">
+  <div class="cat-header">
+    <div>
+      <div class="cat-label-row">
+        <div class="cat-dot" style="background: var(--cat-purple);"></div>
+        <span class="cat-label-text" style="color: var(--cat-purple);">Category</span>
+      </div>
+      <h2 class="cat-title">Random Picker Apps</h2>
+      <p class="cat-sub">Spin the reels, flip a coin — randomness done right.</p>
+    </div>
+    <a href="#" class="cat-viewall">View all →</a>
+  </div>
+  <div class="cat-scroll">
+    <div class="app-card" onclick="openApp('slot-selector', '5 Reel Slot Selector', 'free', 'http://localhost:3044')">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/slot-selector-thumb.png" alt="Slot Selector" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a2e,#3d3d8a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge free">FREE</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">5 Reel Slot Selector</div>
+        <div class="app-features">
+          <div class="app-feature"><span class="check">✓</span> All standard reels</div>
+          <div class="app-feature"><span class="check">✓</span> Winner history</div>
+          <div class="app-feature"><span class="check">✓</span> Sound effects</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Custom images</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Custom music</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free">Use free →</span>
+        <span class="app-upgrade">🔓 Unlock all</span>
+      </div>
+    </div>
+    <div class="app-card" onclick="openApp('coin-toss', 'Coin Toss', 'free', 'http://localhost:3040')">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/coin-toss-thumb.png" alt="Coin Toss" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a2e,#3d3d8a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge free">FREE</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Coin Toss</div>
+        <div class="app-features">
+          <div class="app-feature"><span class="check">✓</span> Heads or tails</div>
+          <div class="app-feature"><span class="check">✓</span> Flip history</div>
+          <div class="app-feature"><span class="check">✓</span> 6 coin styles</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Custom faces</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Custom music</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free">Use free →</span>
+        <span class="app-upgrade">🔓 Unlock all</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider section-divider">
+
+<!-- ─── SIMULATION APPS ─── -->
+<section class="cat-section" id="simulation">
+  <div class="cat-header">
+    <div>
+      <div class="cat-label-row">
+        <div class="cat-dot" style="background: var(--cat-blue);"></div>
+        <span class="cat-label-text" style="color: var(--cat-blue);">Category</span>
+      </div>
+      <h2 class="cat-title">Simulation Apps</h2>
+      <p class="cat-sub">Roll dice, flip cards — realistic simulation tools.</p>
+    </div>
+    <a href="#" class="cat-viewall">View all →</a>
+  </div>
+  <div class="cat-scroll">
+    <div class="app-card" onclick="openApp('dice-roller', 'Dice Roller', 'free', 'http://localhost:3038')">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/dice-roller-thumb.png" alt="Dice Roller" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a2e,#3d3d8a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge free">FREE</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Dice Roller</div>
+        <div class="app-features">
+          <div class="app-feature"><span class="check">✓</span> d4 to d100</div>
+          <div class="app-feature"><span class="check">✓</span> Roll history</div>
+          <div class="app-feature"><span class="check">✓</span> Multiple dice</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Video backgrounds</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Custom sounds</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free">Use free →</span>
+        <span class="app-upgrade">🔓 Unlock all</span>
+      </div>
+    </div>
+    <div class="app-card" onclick="openApp('card-flip', 'Card Flip', 'free', 'http://localhost:3041')">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/card-flip-thumb.png" alt="Card Flip" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a2e,#3d3d8a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge free">FREE</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Card Flip</div>
+        <div class="app-features">
+          <div class="app-feature"><span class="check">✓</span> Full deck</div>
+          <div class="app-feature"><span class="check">✓</span> Shuffle animation</div>
+          <div class="app-feature"><span class="check">✓</span> Draw history</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Custom card backs</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Custom sounds</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free">Use free →</span>
+        <span class="app-upgrade">🔓 Unlock all</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider section-divider">
+
+<!-- ─── GIVEAWAY TOOLS ─── -->
+<section class="cat-section" id="giveaway">
+  <div class="cat-header">
+    <div>
+      <div class="cat-label-row">
+        <div class="cat-dot" style="background: var(--cat-gold);"></div>
+        <span class="cat-label-text" style="color: var(--cat-gold);">Category</span>
+      </div>
+      <h2 class="cat-title">Giveaway Tools</h2>
+      <p class="cat-sub">Pick winners fairly — perfect for contests, giveaways and raffles.</p>
+    </div>
+    <a href="#" class="cat-viewall">View all →</a>
+  </div>
+  <div class="cat-scroll">
+    <div class="app-card" onclick="openApp('name-extractor', 'NameXtractor', 'free', 'http://localhost:3001')">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/name-extractor-thumb.png" alt="NameXtractor" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a2e,#3d3d8a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge free">FREE</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">NameXtractor</div>
+        <div class="app-features">
+          <div class="app-feature"><span class="check">✓</span> Paste any text</div>
+          <div class="app-feature"><span class="check">✓</span> Extract usernames</div>
+          <div class="app-feature"><span class="check">✓</span> Copy results</div>
+          <div class="app-feature"><span class="check">✓</span> Facebook extractor</div>
+          <div class="app-feature"><span class="check">✓</span> Reddit extractor</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free">Use free →</span>
+        <span class="app-upgrade">🔓 Unlock all</span>
+      </div>
+    </div>
+    <div class="app-card" onclick="openApp('promo-pilot-lite', 'Promo Pilot Lite', 'free', 'https://promoplay.ca/promo-pilot')">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/promo-pilot-free-thumb.png" alt="Promo Pilot Lite" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a2e,#3d3d8a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge free">FREE</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Promo Pilot Lite</div>
+        <div class="app-features">
+          <div class="app-feature"><span class="check">✓</span> Random picker</div>
+          <div class="app-feature"><span class="check">✓</span> IP-based limits</div>
+          <div class="app-feature"><span class="check">✓</span> Simple export</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Advanced analytics</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Bulk import</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free">Use free →</span>
+        <span class="app-upgrade">🔓 Unlock all</span>
+      </div>
+    </div>
+    <div class="app-card" onclick="window.open('https://promoplay.ca/promo-pilot-pro', '_blank')">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/promo-pilot-pro-thumb.png" alt="Promo Pilot Pro" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1a2e,#3d3d8a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge pro">PRO</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Promo Pilot Pro</div>
+        <div class="app-features">
+          <div class="app-feature"><span class="check">✓</span> Everything in Lite</div>
+          <div class="app-feature"><span class="check">✓</span> Advanced analytics</div>
+          <div class="app-feature"><span class="check">✓</span> Bulk import</div>
+          <div class="app-feature"><span class="check">✓</span> AWS Stripe login</div>
+          <div class="app-feature"><span class="check">✓</span> Priority support</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free" style="color:var(--muted);">Go to app →</span>
+        <span class="app-upgrade" style="color:var(--cat-gold);">$4.99/mo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider section-divider">
+
+<!-- ─── COMING SOON ─── -->
+<section class="cat-section" id="coming-soon">
+  <div class="cat-header">
+    <div>
+      <div class="cat-label-row">
+        <div class="cat-dot" style="background: var(--cat-soon);"></div>
+        <span class="cat-label-text" style="color: var(--cat-soon);">Category</span>
+      </div>
+      <h2 class="cat-title">Coming Soon</h2>
+      <p class="cat-sub">The roadmap ahead — all tools launching soon.</p>
+    </div>
+  </div>
+  <div class="cat-scroll">
+    <div class="app-card coming-soon">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/slot-3-reel-thumb.png" alt="3 Reel Slot" onerror="this.parentElement.style.background='linear-gradient(135deg,#2a2a3a,#4a4a6a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge coming">SOON</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">3 Reel Slot Selector</div>
+        <div class="app-features">
+          <div class="app-feature locked"><span class="lock">🔒</span> Classic slot feel</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Fast spins</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free">Coming soon</span>
+      </div>
+    </div>
+    <div class="app-card coming-soon">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/wheel-thumb.png" alt="Big Spin Wheel" onerror="this.parentElement.style.background='linear-gradient(135deg,#2a2a3a,#4a4a6a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge coming">SOON</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Big Spin Wheel</div>
+        <div class="app-features">
+          <div class="app-feature locked"><span class="lock">🔒</span> Custom segments</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Sound effects</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free">Coming soon</span>
+      </div>
+    </div>
+    <div class="app-card coming-soon">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/elimination-thumb.png" alt="Elimination Wheel" onerror="this.parentElement.style.background='linear-gradient(135deg,#2a2a3a,#4a4a6a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge coming">SOON</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Elimination Wheel</div>
+        <div class="app-features">
+          <div class="app-feature locked"><span class="lock">🔒</span> Knockout rounds</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Team mode</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free">Coming soon</span>
+      </div>
+    </div>
+    <div class="app-card coming-soon">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/off-to-races-thumb.png" alt="Off to the Races" onerror="this.parentElement.style.background='linear-gradient(135deg,#2a2a3a,#4a4a6a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge coming">SOON</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Off to the Races</div>
+        <div class="app-features">
+          <div class="app-feature locked"><span class="lock">🔒</span> Horse racing sim</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Live odds</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free">Coming soon</span>
+      </div>
+    </div>
+    <div class="app-card coming-soon">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/tourney-thumb.png" alt="Tourney Bracket Sim" onerror="this.parentElement.style.background='linear-gradient(135deg,#2a2a3a,#4a4a6a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge coming">SOON</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Tourney Bracket Sim</div>
+        <div class="app-features">
+          <div class="app-feature locked"><span class="lock">🔒</span> Bracket builder</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Auto advancement</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free">Coming soon</span>
+      </div>
+    </div>
+    <div class="app-card coming-soon">
+      <div class="app-thumb-wrap">
+        <img class="app-thumb" src="/wheel-slices-thumb.png" alt="Wheel of Slices" onerror="this.parentElement.style.background='linear-gradient(135deg,#2a2a3a,#4a4a6a)'"/>
+        <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;font-size:0.5rem;">◆</div>
+        <div class="app-badge coming">SOON</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Wheel of Slices</div>
+        <div class="app-features">
+          <div class="app-feature locked"><span class="lock">🔒</span> Custom slices</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Weighted odds</div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <span class="app-use-free">Coming soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURE BANNER ─── -->
+<section class="feature-banner">
+  <h2>Everything free to try. <span>Everything unlocked with Pro.</span></h2>
+  <p>Start with any tool instantly. Upgrade when you're ready to upload your own content.</p>
+  <div class="feature-pills">
+    <span class="feature-pill"><span class="icon">🎵</span> Custom Music</span>
+    <span class="feature-pill"><span class="icon">🖼️</span> Custom Images</span>
+    <span class="feature-pill"><span class="icon">🎬</span> Video Backgrounds</span>
+    <span class="feature-pill"><span class="icon">🎨</span> Custom Themes</span>
+    <span class="feature-pill"><span class="icon">📤</span> Upload Anything</span>
+    <span class="feature-pill"><span class="icon">🔓</span> All Apps Unlocked</span>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-brand-logo">MURPHYS LABS</span>
+      <p>AI-powered randomness tools for gamers, creators, and professionals. Built by Varg with precision and care.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Tools</h5>
+      <a href="#random-picker">Slot Selector</a>
+      <a href="#random-picker">Coin Toss</a>
+      <a href="#simulation">Dice Roller</a>
+      <a href="#simulation">Card Flip</a>
+    </div>
+    <div class="footer-col">
+      <h5>Giveaway</h5>
+      <a href="#giveaway">NameXtractor</a>
+      <a href="#giveaway">Promo Pilot Lite</a>
+      <a href="#giveaway">Promo Pilot Pro</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#">About</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Murphy Labs. All rights reserved.</p>
+    <div>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── APP VIEWER ─── -->
+<div id="app-viewer">
+  <div class="viewer-bar">
+    <div class="viewer-left">
+      <button class="viewer-back" onclick="closeViewer()">← Back to Home</button>
+      <span class="viewer-app-name" id="viewer-app-name">App Name</span>
+      <span class="viewer-badge free" id="viewer-badge">FREE</span>
+    </div>
+    <div class="viewer-right">
+      <div class="viewer-user" id="viewer-user" style="display:none;">
+        <div class="viewer-user-avatar">V</div>
+        <span>Varg</span>
+      </div>
+      <a href="#" class="btn-pro-badge" id="viewer-pro-btn" onclick="openAuth('register')">Upgrade $4.99</a>
+      <button class="viewer-back" onclick="closeViewer()" style="padding:7px 14px;font-size:0.75rem;">✕ Close</button>
+    </div>
+  </div>
+  <iframe id="app-iframe" src="about:blank"></iframe>
+</div>
+
+<!-- ─── UPGRADE BANNER ─── -->
+<div id="upgrade-banner">
+  <div class="upgrade-left">
+    <span class="upgrade-icon">🔓</span>
+    <div class="upgrade-text">
+      <strong>Want to upload your own music, images & themes?</strong>
+      <span>Pro subscription unlocks all custom content features across every app.</span>
+    </div>
+  </div>
+  <button class="upgrade-btn" onclick="openAuth('register')">Upgrade to Pro — $4.99/mo</button>
+</div>
+
+<!-- ─── AUTH MODAL ─── -->
+<div id="auth-modal">
+  <div class="auth-box">
+    <button class="auth-close" onclick="closeAuth()">✕</button>
+    <div class="auth-title" id="auth-title">Sign In</div>
+    <div class="auth-sub" id="auth-sub">Access your Pro features and unlocked content.</div>
+    <div class="auth-tabs">
+      <div class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Sign In</div>
+      <div class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Register</div>
+    </div>
+    <div id="auth-form-login">
+      <div class="auth-field">
+        <label>Email</label>
+        <input type="email" placeholder="you@example.com" id="login-email"/>
+      </div>
+      <div class="auth-field">
+        <label>Password</label>
+        <input type="password" placeholder="••••••••" id="login-password"/>
+      </div>
+      <button class="auth-btn-main" onclick="handleLogin()">Sign In</button>
+      <div class="auth-pro-note"><a href="#" onclick="openAuth('register'); return false;">Not yet registered? →</a></div>
+    </div>
+    <div id="auth-form-register" style="display:none;">
+      <div class="auth-field">
+        <label>Full Name</label>
+        <input type="text" placeholder="Varg" id="reg-name"/>
+      </div>
+      <div class="auth-field">
+        <label>Email</label>
+        <input type="email" placeholder="you@example.com" id="reg-email"/>
+      </div>
+      <div class="auth-field">
+        <label>Password</label>
+        <input type="password" placeholder="••••••••" id="reg-password"/>
+      </div>
+      <button class="auth-btn-main" onclick="handleRegister()">Create Account — Free</button>
+      <div class="auth-pro-note">Pro subscription can be activated after account creation.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let isLoggedIn = false;
+
+  function openApp(id, name, tier, url) {
+    const viewer = document.getElementById('app-viewer');
+    const iframe = document.getElementById('app-iframe');
+    const appName = document.getElementById('viewer-app-name');
+    const badge = document.getElementById('viewer-badge');
+    const banner = document.getElementById('upgrade-banner');
+
+    appName.textContent = name;
+    badge.textContent = tier.toUpperCase();
+    badge.className = 'viewer-badge ' + (tier === 'pro' ? 'pro' : 'free');
+    iframe.src = url;
+
+    viewer.classList.add('open');
+    document.body.classList.add('iframe-open');
+
+    if (tier === 'free' && !isLoggedIn) {
+      banner.classList.add('show');
+    } else {
+      banner.classList.remove('show');
+    }
+  }
+
+  function closeViewer() {
+    const viewer = document.getElementById('app-viewer');
+    const iframe = document.getElementById('app-iframe');
+    viewer.classList.remove('open');
+    document.body.classList.remove('iframe-open');
+    iframe.src = 'about:blank';
+    document.getElementById('upgrade-banner').classList.remove('show');
+  }
+
+  function openAuth(tab) {
+    const modal = document.getElementById('auth-modal');
+    modal.classList.add('open');
+    switchAuthTab(tab);
+  }
+
+  function closeAuth() {
+    document.getElementById('auth-modal').classList.remove('open');
+  }
+
+  function switchAuthTab(tab) {
+    const isLogin = tab === 'login';
+    document.getElementById('auth-title').textContent = isLogin ? 'Sign In' : 'Create Account';
+    document.getElementById('auth-sub').textContent = isLogin
+      ? 'Access your Pro features and unlocked content.'
+      : 'Start free. Upgrade when you\'re ready.';
+    document.getElementById('auth-form-login').style.display = isLogin ? 'block' : 'none';
+    document.getElementById('auth-form-register').style.display = isLogin ? 'none' : 'block';
+    document.getElementById('tab-login').classList.toggle('active', isLogin);
+    document.getElementById('tab-register').classList.toggle('active', !isLogin);
+  }
+
+  function handleLogin() {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    if (!email || !password) { alert('Please fill in all fields.'); return; }
+    // Placeholder: wire to Cloudflare Auth or your auth provider
+    isLoggedIn = true;
+    document.getElementById('viewer-user').style.display = 'flex';
+    document.getElementById('upgrade-banner').classList.remove('show');
+    closeAuth();
+  }
+
+  function handleRegister() {
+    const name = document.getElementById('reg-name').value;
+    const email = document.getElementById('reg-email').value;
+    const password = document.getElementById('reg-password').value;
+    if (!name || !email || !password) { alert('Please fill in all fields.'); return; }
+    // Placeholder: wire to Cloudflare Auth or your auth provider
+    isLoggedIn = true;
+    document.getElementById('viewer-user').style.display = 'flex';
+    closeAuth();
+  }
+
+  // Close modals on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeAuth(); closeViewer(); }
+  });
+
+  // Close modal on backdrop click
+  document.getElementById('auth-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('auth-modal')) closeAuth();
+  });
+</script>
+
+</body>
+</html>
