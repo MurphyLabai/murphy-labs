@@ -173,8 +173,8 @@
       border-color: rgba(124,111,255,0.4); transform: translateY(-5px);
       box-shadow: 0 14px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(124,111,255,0.1);
     }
-    .app-card:hover .app-thumb-canvas,
     .app-card:hover .app-thumb-img { transform: scale(1.04); }
+    .app-card:hover .app-thumb-canvas { transform: scale(1.04); }
     .app-card.coming-soon { opacity: 0.65; }
     .app-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--card-border); }
     .app-thumb-wrap {
@@ -183,6 +183,23 @@
     }
     .app-thumb-canvas,
     .app-thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s; }
+    /* ─── CAROUSEL ─── */
+    .carousel-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: 0; transition: opacity 0.5s ease;
+    }
+    .carousel-img.active { opacity: 1; }
+    .carousel-dots {
+      position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 5px; z-index: 10; pointer-events: none;
+    }
+    .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.35); border: none; cursor: pointer;
+      transition: all 0.2s; padding: 0; pointer-events: all;
+    }
+    .dot.active { background: #fff; transform: scale(1.25); }
+    .app-card:hover .dot { background: rgba(255,255,255,0.65); }
     .app-cat-badge {
       position: absolute; top: 10px; left: 10px;
       width: 22px; height: 22px; border-radius: 50%;
@@ -503,11 +520,12 @@
   </div>
   <div class="cat-scroll">
     <!-- 5 Reel Slot Selector -->
-    <div class="app-card" onclick="openApp('slot-selector','5 Reel Slot Selector','free','http://192.168.1.120:3044')">
+    <div class="app-card app-carousel" data-images="slot-selector-1.png|slot-selector-2.png|slot-selector-3.png|slot-selector-4.png|slot-selector-5.png" onclick="openApp('slot-selector','5 Reel Slot Selector','free','http://192.168.1.120:3044')">
       <div class="app-thumb-wrap" id="thumb-slot">
-        <img class="app-thumb-img" src="slot-selector-thumb.png" alt="Slot Selector"/>
+        <img class="app-thumb-img carousel-img active" src="slot-selector-1.png" alt="Slot Selector"/>
         <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
+        <div class="carousel-dots"></div>
       </div>
       <div class="app-body">
         <div class="app-name">5 Reel Slot Selector</div>
@@ -1247,7 +1265,76 @@ document.getElementById('auth-modal').addEventListener('click', e=>{ if(e.target
 document.getElementById('mega-nudge').addEventListener('click', e=>{ if(e.target===document.getElementById('mega-nudge')) closeMegaNudge(); });
 
 // ─── INIT ───
-window.addEventListener('DOMContentLoaded', () => {});
+window.addEventListener('DOMContentLoaded', () => {
+  initCarousels();
+});
+
+// ─── CAROUSEL ───
+function initCarousels(){
+  document.querySelectorAll('.app-carousel').forEach(card => {
+    const images = card.dataset.images.split('|');
+    if(images.length <= 1) return;
+    const wrap = card.querySelector('.app-thumb-wrap');
+    const dotsContainer = card.querySelector('.carousel-dots');
+
+    // Build all image elements
+    images.forEach((src, i) => {
+      const img = card.querySelector('.carousel-img') || document.createElement('img');
+      img.className = 'app-thumb-img carousel-img' + (i === 0 ? ' active' : '');
+      img.src = src;
+      img.alt = 'Screenshot ' + (i+1);
+      img.style.opacity = i === 0 ? '1' : '0';
+      if(i > 0) wrap.insertBefore(img, dotsContainer);
+
+      // Build dot
+      const dot = document.createElement('button');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Screenshot ' + (i+1));
+      dot.addEventListener('click', e => {
+        e.stopPropagation();
+        setCarouselFrame(card, wrap, images, dotsContainer, i);
+        resetAutoAdvance(card, wrap, images, dotsContainer);
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    // Click card = advance
+    card.addEventListener('click', () => {
+      const current = wrap.querySelectorAll('.carousel-img');
+      let idx = 0;
+      current.forEach((img, i) => { if(img.classList.contains('active')) idx = i; });
+      const next = (idx + 1) % images.length;
+      setCarouselFrame(card, wrap, images, dotsContainer, next);
+      resetAutoAdvance(card, wrap, images, dotsContainer);
+    });
+
+    // Auto-advance
+    let timer = setInterval(() => autoAdvance(card, wrap, images, dotsContainer), 4000);
+    card._carouselTimer = timer;
+  });
+}
+
+function setCarouselFrame(card, wrap, images, dotsContainer, idx){
+  wrap.querySelectorAll('.carousel-img').forEach((img, i) => {
+    img.classList.toggle('active', i === idx);
+  });
+  dotsContainer.querySelectorAll('.dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === idx);
+  });
+}
+
+function autoAdvance(card, wrap, images, dotsContainer){
+  const imgs = wrap.querySelectorAll('.carousel-img');
+  let idx = 0;
+  imgs.forEach((img, i) => { if(img.classList.contains('active')) idx = i; });
+  setCarouselFrame(card, wrap, images, dotsContainer, (idx + 1) % images.length);
+}
+
+function resetAutoAdvance(card, wrap, images, dotsContainer){
+  clearInterval(card._carouselTimer);
+  card._carouselTimer = setInterval(() => autoAdvance(card, wrap, images, dotsContainer), 4000);
+}
+
 
 // Listen for postMessage from iframe apps requesting mega fullscreen
 window.addEventListener('message', e => {
