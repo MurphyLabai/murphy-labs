@@ -281,6 +281,12 @@
       border-radius: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; flex-shrink: 0;
     }
     .upgrade-btn:hover { background: #b88a28; }
+    .upgrade-dismiss {
+      background: none; border: none; color: rgba(255,255,255,0.4);
+      font-size: 1.1rem; cursor: pointer; padding: 4px 8px; border-radius: 6px;
+      transition: all 0.2s; flex-shrink: 0; line-height: 1;
+    }
+    .upgrade-dismiss:hover { color: #fff; background: rgba(255,255,255,0.1); }
 
     /* ─── AUTH MODAL ─── */
     #auth-modal {
@@ -837,6 +843,7 @@
     </div>
   </div>
   <button class="upgrade-btn" onclick="openAuth('register')">Upgrade to Pro — $4.99/mo</button>
+  <button class="upgrade-dismiss" onclick="dismissBanner()" title="Dismiss">✕</button>
 </div>
 
 <!-- ─── AUTH MODAL ─── -->
@@ -1048,6 +1055,12 @@ function drawThumbs(){
 
 // ─── APP VIEWER ───
 let isLoggedIn = false;
+var currentAppId = '';
+
+function dismissBanner(){
+  document.getElementById('upgrade-banner').classList.remove('show');
+  try { localStorage.setItem('pp_banner_dismissed_' + currentAppId, '1'); } catch(e){}
+}
 
 function openApp(id, name, tier, url) {
   const viewer = document.getElementById('app-viewer');
@@ -1056,6 +1069,7 @@ function openApp(id, name, tier, url) {
   const appName = document.getElementById('viewer-app-name');
   const badge = document.getElementById('viewer-badge');
   const banner = document.getElementById('upgrade-banner');
+  currentAppId = id;
 
   appName.textContent = name;
   badge.textContent = tier.toUpperCase();
@@ -1068,7 +1082,9 @@ function openApp(id, name, tier, url) {
   viewer.classList.add('open');
   document.body.classList.add('iframe-open');
 
-  banner.classList.toggle('show', tier === 'free' && !isLoggedIn);
+  var dismissed = false;
+  try { dismissed = localStorage.getItem('pp_banner_dismissed_' + id) === '1'; } catch(e){}
+  banner.classList.toggle('show', tier === 'free' && !isLoggedIn && !dismissed);
   document.getElementById('viewer-pro-btn').style.display = tier === 'pro' ? 'none' : '';
 }
 
@@ -1081,6 +1097,7 @@ function closeViewer() {
   iframe.onload = null;
   document.getElementById('upgrade-banner').classList.remove('show');
   document.getElementById('iframe-loading').classList.remove('hidden');
+  currentAppId = '';
 }
 
 // ─── AUTH ───
