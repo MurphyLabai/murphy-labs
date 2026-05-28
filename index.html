@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Murphy Labs — AI-Powered Randomness Tools</title>
   <meta name="description" content="Free AI-powered random tools: slot selectors, dice rollers, coin tosses, card flips, and more. Upgrade to unlock custom uploads.">
   <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -104,6 +104,7 @@
       max-width: 1300px;
       margin: 0 auto;
       background: linear-gradient(160deg, #fafbfc 0%, #f0f1f5 100%);
+      width: 100%;
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 6px;
@@ -401,22 +402,24 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
-      nav { padding: 12px 24px; } .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; gap: 36px; padding: 50px 24px 50px; }
-      .cat-section { padding: 40px 20px; }
+      nav { padding: 12px 20px; } .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 50px; width: 100%; max-width: 100%; }
+      .cat-section { padding: 36px 16px; }
       .cat-scroll { gap: 12px; } .app-card { width: 190px; }
       .footer-top { grid-template-columns: 1fr 1fr; }
       .footer-bottom { flex-direction: column; gap: 10px; }
-      .section-divider { padding: 0 20px; }
+      .section-divider { padding: 0 16px; }
     }
     @media (max-width: 600px) {
       .hero-stats { grid-template-columns: repeat(3, 1fr); }
       .app-card { width: 170px; }
       .footer-top { grid-template-columns: 1fr; }
       .viewer-bar { padding: 10px 16px; }
-      .hero { padding: 40px 16px 50px; }
-      .cat-section { padding: 36px 14px; }
-      .section-divider { padding: 0 14px; }
+      .hero { padding: 36px 14px 50px; }
+      .cat-section { padding: 32px 12px; }
+      .section-divider { padding: 0 12px; }
+      .hero-actions { flex-direction: column; gap: 10px; }
+      .btn-primary, .btn-gold { width: 100%; text-align: center; }
     }
   </style>
 </head>
