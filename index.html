@@ -184,11 +184,6 @@
     .app-thumb-canvas,
     .app-thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s; }
     /* ─── CAROUSEL ─── */
-    .carousel-img {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      object-fit: cover; opacity: 0 !important; transition: opacity 0.5s ease; z-index: 1;
-    }
-    .carousel-img.active { opacity: 1 !important; z-index: 2; }
     .carousel-dots {
       position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
       display: flex; gap: 5px; z-index: 10; pointer-events: none;
@@ -196,9 +191,9 @@
     .dot {
       width: 6px; height: 6px; border-radius: 50%;
       background: rgba(255,255,255,0.35); border: none; cursor: pointer;
-      transition: all 0.2s; padding: 0; pointer-events: all;
+      transition: all 0.2s; padding: 0;
     }
-    .dot.active { background: #fff; transform: scale(1.25); }
+    .dot.active { background: #fff; transform: scale(1.3); }
     .app-card:hover .dot { background: rgba(255,255,255,0.65); }
     .app-cat-badge {
       position: absolute; top: 10px; left: 10px;
@@ -522,10 +517,9 @@
     <!-- 5 Reel Slot Selector -->
     <div class="app-card app-carousel" data-images="slot-selector-1.png|slot-selector-2.png|slot-selector-3.png|slot-selector-4.png|slot-selector-5.png" onclick="openApp('slot-selector','5 Reel Slot Selector','free','http://192.168.1.120:3044')">
       <div class="app-thumb-wrap" id="thumb-slot">
-        <img class="app-thumb-img carousel-img active" src="slot-selector-1.png" alt="Slot Selector"/>
+        <div class="carousel-dots"></div>
         <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
-        <div class="carousel-dots"></div>
       </div>
       <div class="app-body">
         <div class="app-name">5 Reel Slot Selector</div>
@@ -1277,62 +1271,69 @@ function initCarousels(){
     const wrap = card.querySelector('.app-thumb-wrap');
     const dotsContainer = card.querySelector('.carousel-dots');
 
-    // Build all image elements
+    // Create all image layers with inline styles (no CSS dependency)
     images.forEach((src, i) => {
-      const img = card.querySelector('.carousel-img') || document.createElement('img');
-      img.className = 'app-thumb-img carousel-img' + (i === 0 ? ' active' : '');
+      const img = document.createElement('img');
+      img.style.cssText = `
+        position: absolute; top: 0; left: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        opacity: ${i === 0 ? 1 : 0};
+        transition: opacity 0.45s ease;
+        z-index: ${i === 0 ? 2 : 1};
+        pointer-events: none;
+      `;
       img.src = src;
       img.alt = 'Screenshot ' + (i+1);
-      img.style.opacity = i === 0 ? '1' : '0';
-      if(i > 0) wrap.insertBefore(img, dotsContainer);
+      wrap.insertBefore(img, dotsContainer);
 
       // Build dot
       const dot = document.createElement('button');
       dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.style.cssText = i === 0 ? '' : '';
       dot.setAttribute('aria-label', 'Screenshot ' + (i+1));
       dot.addEventListener('click', e => {
         e.stopPropagation();
-        setCarouselFrame(card, wrap, images, dotsContainer, i);
-        resetAutoAdvance(card, wrap, images, dotsContainer);
+        showFrame(card, wrap, images, dotsContainer, i);
+        resetTimer(card, wrap, images, dotsContainer);
       });
       dotsContainer.appendChild(dot);
     });
 
     // Click card = advance
     card.addEventListener('click', () => {
-      const current = wrap.querySelectorAll('.carousel-img');
+      const current = wrap.querySelectorAll('img[src]');
       let idx = 0;
-      current.forEach((img, i) => { if(img.classList.contains('active')) idx = i; });
-      const next = (idx + 1) % images.length;
-      setCarouselFrame(card, wrap, images, dotsContainer, next);
-      resetAutoAdvance(card, wrap, images, dotsContainer);
+      current.forEach((img, i) => { if(parseFloat(img.style.opacity) === 1) idx = i; });
+      showFrame(card, wrap, images, dotsContainer, (idx + 1) % images.length);
+      resetTimer(card, wrap, images, dotsContainer);
     });
 
     // Auto-advance
-    let timer = setInterval(() => autoAdvance(card, wrap, images, dotsContainer), 4000);
-    card._carouselTimer = timer;
+    card._timer = setInterval(() => autoAdv(card, wrap, images, dotsContainer), 4000);
   });
 }
 
-function setCarouselFrame(card, wrap, images, dotsContainer, idx){
-  wrap.querySelectorAll('.carousel-img').forEach((img, i) => {
-    img.classList.toggle('active', i === idx);
+function showFrame(card, wrap, images, dotsContainer, idx){
+  const imgs = wrap.querySelectorAll('img[src]');
+  imgs.forEach((img, i) => {
+    img.style.opacity = i === idx ? '1' : '0';
+    img.style.zIndex = i === idx ? '2' : '1';
   });
-  dotsContainer.querySelectorAll('.dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === idx);
-  });
+  const dots = dotsContainer.querySelectorAll('.dot');
+  dots.forEach((dot, i) => { dot.classList.toggle('active', i === idx); });
 }
 
-function autoAdvance(card, wrap, images, dotsContainer){
-  const imgs = wrap.querySelectorAll('.carousel-img');
+function autoAdv(card, wrap, images, dotsContainer){
+  const imgs = wrap.querySelectorAll('img[src]');
   let idx = 0;
-  imgs.forEach((img, i) => { if(img.classList.contains('active')) idx = i; });
-  setCarouselFrame(card, wrap, images, dotsContainer, (idx + 1) % images.length);
+  imgs.forEach((img, i) => { if(parseFloat(img.style.opacity) === 1) idx = i; });
+  showFrame(card, wrap, images, dotsContainer, (idx + 1) % images.length);
 }
 
-function resetAutoAdvance(card, wrap, images, dotsContainer){
-  clearInterval(card._carouselTimer);
-  card._carouselTimer = setInterval(() => autoAdvance(card, wrap, images, dotsContainer), 4000);
+function resetTimer(card, wrap, images, dotsContainer){
+  clearInterval(card._timer);
+  card._timer = setInterval(() => autoAdv(card, wrap, images, dotsContainer), 4000);
 }
 
 
