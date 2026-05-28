@@ -245,6 +245,14 @@
       font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
     }
     .viewer-close:hover { border-color: #e04040; color: #e04040; }
+    .viewer-mega {
+      display: flex; align-items: center; gap: 5px;
+      background: rgba(124,111,255,0.1); border: 1.5px solid rgba(124,111,255,0.3);
+      color: var(--cat-purple); padding: 7px 14px; border-radius: 8px;
+      font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .viewer-mega:hover { background: rgba(124,111,255,0.2); border-color: var(--cat-purple); }
     #app-iframe-wrap {
       flex: 1; position: relative; background: #fff; overflow: hidden;
     }
@@ -358,6 +366,36 @@
     .footer-bottom p { font-size: 0.72rem; }
     .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.72rem; margin-left: 20px; }
     .footer-bottom a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ─── MEGA FULLSCREEN NUDGE MODAL ─── */
+    #mega-nudge {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 600;
+      display: none; align-items: center; justify-content: center;
+    }
+    #mega-nudge.open { display: flex; }
+    .mega-nudge-box {
+      background: var(--surface); border-radius: 20px; padding: 40px 44px;
+      width: 100%; max-width: 400px; text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25); position: relative;
+    }
+    .mega-nudge-icon { font-size: 3rem; margin-bottom: 16px; display: block; }
+    .mega-nudge-box h3 { font-size: 1.35rem; font-weight: 800; margin-bottom: 10px; color: var(--text); }
+    .mega-nudge-box p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 20px; }
+    .nudge-perks { text-align: left; margin-bottom: 24px; }
+    .nudge-perk { display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: var(--text); margin-bottom: 8px; font-weight: 500; }
+    .nudge-perk span { color: var(--gold); font-size: 1rem; }
+    .mega-nudge-actions { display: flex; flex-direction: column; gap: 10px; }
+    .mega-nudge-actions .btn-register {
+      background: var(--gold); color: #fff; border: none; padding: 12px;
+      border-radius: 10px; font-size: 0.9rem; font-weight: 700; cursor: pointer; width: 100%;
+      transition: all 0.2s;
+    }
+    .mega-nudge-actions .btn-register:hover { background: #b88a28; }
+    .mega-nudge-actions .btn-skip {
+      background: transparent; color: var(--muted); border: none;
+      font-size: 0.78rem; cursor: pointer; padding: 6px; transition: color 0.2s;
+    }
+    .mega-nudge-actions .btn-skip:hover { color: var(--text-secondary); }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
@@ -821,6 +859,7 @@
         <span id="viewer-user-name">Varg</span>
       </div>
       <a href="#" class="btn-pro-badge" id="viewer-pro-btn" onclick="openAuth('register')">Upgrade $4.99</a>
+      <button class="viewer-mega" id="viewer-mega-btn" onclick="openMegaNudge()" title="Mega Fullscreen">⛶ Mega</button>
       <button class="viewer-close" onclick="closeViewer()">✕ Close</button>
     </div>
   </div>
@@ -844,6 +883,24 @@
   </div>
   <button class="upgrade-btn" onclick="openAuth('register')">Upgrade to Pro — $4.99/mo</button>
   <button class="upgrade-dismiss" onclick="dismissBanner()" title="Dismiss">✕</button>
+</div>
+
+<!-- ─── MEGA NUDGE MODAL ─── -->
+<div id="mega-nudge">
+  <div class="mega-nudge-box">
+    <span class="mega-nudge-icon">⛶</span>
+    <h3>Mega Fullscreen</h3>
+    <p>Create a free account to unlock Mega Fullscreen mode and other features.</p>
+    <div class="nudge-perks">
+      <div class="nudge-perk"><span>✓</span> Mega Fullscreen mode</div>
+      <div class="nudge-perk"><span>✓</span> Save your preferences</div>
+      <div class="nudge-perk"><span>✓</span> Easy upgrade path to Pro</div>
+    </div>
+    <div class="mega-nudge-actions">
+      <button class="btn-register" onclick="handleNudgeRegister()">Create Free Account</button>
+      <button class="btn-skip" onclick="closeMegaNudge()">Maybe later</button>
+    </div>
+  </div>
 </div>
 
 <!-- ─── AUTH MODAL ─── -->
@@ -1056,10 +1113,31 @@ function drawThumbs(){
 // ─── APP VIEWER ───
 let isLoggedIn = false;
 var currentAppId = '';
+var megaFullscreenActive = false;
 
 function dismissBanner(){
   document.getElementById('upgrade-banner').classList.remove('show');
   try { localStorage.setItem('pp_banner_dismissed_' + currentAppId, '1'); } catch(e){}
+}
+
+function openMegaNudge(){
+  if(isLoggedIn){
+    triggerMegaFullscreen();
+    return;
+  }
+  document.getElementById('mega-nudge').classList.add('open');
+}
+function closeMegaNudge(){
+  document.getElementById('mega-nudge').classList.remove('open');
+}
+function handleNudgeRegister(){
+  closeMegaNudge();
+  openAuth('register');
+}
+function triggerMegaFullscreen(){
+  const iframe = document.getElementById('app-iframe');
+  if(!iframe.contentWindow) return;
+  try { iframe.contentWindow.postMessage('megaFullscreen', '*'); } catch(e){}
 }
 
 function openApp(id, name, tier, url) {
@@ -1086,6 +1164,7 @@ function openApp(id, name, tier, url) {
   try { dismissed = localStorage.getItem('pp_banner_dismissed_' + id) === '1'; } catch(e){}
   banner.classList.toggle('show', tier === 'free' && !isLoggedIn && !dismissed);
   document.getElementById('viewer-pro-btn').style.display = tier === 'pro' ? 'none' : '';
+  document.getElementById('viewer-mega-btn').style.display = '';
 }
 
 function closeViewer() {
@@ -1135,14 +1214,23 @@ function handleRegister(){
   document.getElementById('viewer-user').style.display='flex';
   document.getElementById('viewer-user-name').textContent=name;
   closeAuth();
+  closeMegaNudge();
+  setTimeout(triggerMegaFullscreen, 300);
 }
 
 // ─── KEYBOARD / BACKDROP ───
-document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeAuth(); closeViewer(); } });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeAuth(); closeViewer(); closeMegaNudge(); } });
 document.getElementById('auth-modal').addEventListener('click', e=>{ if(e.target===document.getElementById('auth-modal')) closeAuth(); });
+document.getElementById('mega-nudge').addEventListener('click', e=>{ if(e.target===document.getElementById('mega-nudge')) closeMegaNudge(); });
 
 // ─── INIT ───
 window.addEventListener('DOMContentLoaded', drawThumbs);
+
+// Listen for postMessage from iframe apps requesting mega fullscreen
+window.addEventListener('message', e => {
+  if(e.data === 'requestMegaFullscreen') openMegaNudge();
+  if(e.data === 'megaFullscreenGranted'){ megaFullscreenActive = true; }
+});
 </script>
 
 </body>
