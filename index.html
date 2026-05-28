@@ -173,14 +173,16 @@
       border-color: rgba(124,111,255,0.4); transform: translateY(-5px);
       box-shadow: 0 14px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(124,111,255,0.1);
     }
-    .app-card:hover .app-thumb-canvas { transform: scale(1.04); }
+    .app-card:hover .app-thumb-canvas,
+    .app-card:hover .app-thumb-img { transform: scale(1.04); }
     .app-card.coming-soon { opacity: 0.65; }
     .app-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--card-border); }
     .app-thumb-wrap {
       position: relative; height: 148px; overflow: hidden;
       background: linear-gradient(135deg, #1a1a2e, #2d2d5a);
     }
-    .app-thumb-canvas { width: 100%; height: 100%; display: block; transition: transform 0.35s; }
+    .app-thumb-canvas,
+    .app-thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s; }
     .app-cat-badge {
       position: absolute; top: 10px; left: 10px;
       width: 22px; height: 22px; border-radius: 50%;
@@ -494,7 +496,7 @@
     <!-- 5 Reel Slot Selector -->
     <div class="app-card" onclick="openApp('slot-selector','5 Reel Slot Selector','free','http://192.168.1.120:3044')">
       <div class="app-thumb-wrap" id="thumb-slot">
-        <canvas class="app-thumb-canvas" id="canvas-slot"></canvas>
+        <img class="app-thumb-img" src="slot-selector-thumb.png" alt="Slot Selector"/>
         <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
       </div>
@@ -516,7 +518,7 @@
     <!-- Coin Toss -->
     <div class="app-card" onclick="openApp('coin-toss','Coin Toss','free','http://192.168.1.120:3040')">
       <div class="app-thumb-wrap" id="thumb-coin">
-        <canvas class="app-thumb-canvas" id="canvas-coin"></canvas>
+        <img class="app-thumb-img" src="coin-toss-thumb.png" alt="Coin Toss"/>
         <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
       </div>
@@ -557,7 +559,7 @@
     <!-- Dice Roller -->
     <div class="app-card" onclick="openApp('dice-roller','Dice Roller','free','http://192.168.1.120:3038')">
       <div class="app-thumb-wrap" id="thumb-dice">
-        <canvas class="app-thumb-canvas" id="canvas-dice"></canvas>
+        <img class="app-thumb-img" src="dice-roller-thumb.png" alt="Dice Roller"/>
         <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
       </div>
@@ -579,7 +581,7 @@
     <!-- Card Flip -->
     <div class="app-card" onclick="openApp('card-flip','Card Flip','free','http://192.168.1.120:3041')">
       <div class="app-thumb-wrap" id="thumb-card">
-        <canvas class="app-thumb-canvas" id="canvas-card"></canvas>
+        <img class="app-thumb-img" src="card-flip-thumb.png" alt="Card Flip"/>
         <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
       </div>
@@ -620,7 +622,7 @@
     <!-- NameXtractor -->
     <div class="app-card" onclick="openApp('name-extractor','NameXtractor','free','http://192.168.1.120:3001')">
       <div class="app-thumb-wrap" id="thumb-namex">
-        <canvas class="app-thumb-canvas" id="canvas-namex"></canvas>
+        <img class="app-thumb-img" src="name-extractor-thumb.png" alt="NameXtractor"/>
         <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
       </div>
@@ -642,7 +644,7 @@
     <!-- Promo Pilot Lite -->
     <div class="app-card" onclick="openApp('promo-pilot-lite','Promo Pilot Lite','free','https://promoplay.ca/promo-pilot')">
       <div class="app-thumb-wrap" id="thumb-pplite">
-        <canvas class="app-thumb-canvas" id="canvas-pplite"></canvas>
+        <img class="app-thumb-img" src="promo-pilot-free-thumb.png" alt="Promo Pilot Lite"/>
         <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
       </div>
@@ -664,7 +666,7 @@
     <!-- Promo Pilot Pro -->
     <div class="app-card" onclick="window.open('https://promoplay.ca/promo-pilot-pro','_blank')">
       <div class="app-thumb-wrap" id="thumb-pppro">
-        <canvas class="app-thumb-canvas" id="canvas-pppro"></canvas>
+        <img class="app-thumb-img" src="promo-pilot-free-thumb.png" alt="Promo Pilot Pro"/>
         <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
         <div class="app-badge pro">PRO</div>
       </div>
@@ -703,7 +705,7 @@
   <div class="cat-scroll">
     <div class="app-card coming-soon">
       <div class="app-thumb-wrap" id="thumb-3reel">
-        <canvas class="app-thumb-canvas" id="canvas-3reel"></canvas>
+        <img class="app-thumb-img" src="slot-3-reel-thumb.png" alt="3 Reel Slot"/>
         <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
         <div class="app-badge coming">SOON</div>
       </div>
@@ -718,7 +720,7 @@
     </div>
     <div class="app-card coming-soon">
       <div class="app-thumb-wrap" id="thumb-wheel">
-        <canvas class="app-thumb-canvas" id="canvas-wheel"></canvas>
+        <img class="app-thumb-img" src="wheel-thumb.png" alt="Big Spin Wheel"/>
         <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;">◆</div>
         <div class="app-badge coming">SOON</div>
       </div>
@@ -733,7 +735,7 @@
     </div>
     <div class="app-card coming-soon">
       <div class="app-thumb-wrap" id="thumb-elim">
-        <canvas class="app-thumb-canvas" id="canvas-elim"></canvas>
+        <img class="app-thumb-img" src="elimination-thumb.png" alt="Elimination Wheel"/>
         <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
         <div class="app-badge coming">SOON</div>
       </div>
@@ -748,7 +750,7 @@
     </div>
     <div class="app-card coming-soon">
       <div class="app-thumb-wrap" id="thumb-races">
-        <canvas class="app-thumb-canvas" id="canvas-races"></canvas>
+        <img class="app-thumb-img" src="off-to-races-thumb.png" alt="Off to the Races"/>
         <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;">◆</div>
         <div class="app-badge coming">SOON</div>
       </div>
@@ -763,7 +765,7 @@
     </div>
     <div class="app-card coming-soon">
       <div class="app-thumb-wrap" id="thumb-tourney">
-        <canvas class="app-thumb-canvas" id="canvas-tourney"></canvas>
+        <img class="app-thumb-img" src="tourney-thumb.png" alt="Tourney Bracket Sim"/>
         <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
         <div class="app-badge coming">SOON</div>
       </div>
@@ -778,7 +780,7 @@
     </div>
     <div class="app-card coming-soon">
       <div class="app-thumb-wrap" id="thumb-slices">
-        <canvas class="app-thumb-canvas" id="canvas-slices"></canvas>
+        <img class="app-thumb-img" src="wheel-slices-thumb.png" alt="Wheel of Slices"/>
         <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
         <div class="app-badge coming">SOON</div>
       </div>
@@ -793,7 +795,7 @@
     </div>
     <div class="app-card coming-soon">
       <div class="app-thumb-wrap" id="thumb-fishing">
-        <canvas class="app-thumb-canvas" id="canvas-fishing"></canvas>
+        <img class="app-thumb-img" src="tourney-thumb.png" alt="Fishing Derby Sim"/>
         <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;">◆</div>
         <div class="app-badge coming">SOON</div>
       </div>
@@ -1236,7 +1238,7 @@ document.getElementById('auth-modal').addEventListener('click', e=>{ if(e.target
 document.getElementById('mega-nudge').addEventListener('click', e=>{ if(e.target===document.getElementById('mega-nudge')) closeMegaNudge(); });
 
 // ─── INIT ───
-window.addEventListener('DOMContentLoaded', drawThumbs);
+window.addEventListener('DOMContentLoaded', () => {});
 
 // Listen for postMessage from iframe apps requesting mega fullscreen
 window.addEventListener('message', e => {
