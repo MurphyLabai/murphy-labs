@@ -400,11 +400,15 @@
     }
     .mega-nudge-actions .btn-skip:hover { color: var(--text-secondary); }
 
-    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      html, body { overflow-x: hidden; width: 100vw; max-width: 100vw; }
+      html { margin-left: 0; margin-right: 0; }
+    }
     @media (max-width: 900px) {
       nav { padding: 12px 20px; } .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 50px; width: 100%; max-width: 100%; }
-      .cat-section { padding: 36px 16px; }
+      .hero { grid-template-columns: 1fr; gap: 32px; padding: 40px 0 50px; max-width: 100%; margin: 0; border-radius: 0; }
+      .hero-left, .hero-right { padding: 0 16px; }
+      .cat-section { padding: 36px 0; }
       .cat-scroll { gap: 12px; } .app-card { width: 190px; }
       .footer-top { grid-template-columns: 1fr 1fr; }
       .footer-bottom { flex-direction: column; gap: 10px; }
@@ -415,9 +419,9 @@
       .app-card { width: 170px; }
       .footer-top { grid-template-columns: 1fr; }
       .viewer-bar { padding: 10px 16px; }
-      .hero { padding: 36px 14px 50px; }
-      .cat-section { padding: 32px 12px; }
-      .section-divider { padding: 0 12px; }
+      .hero { padding: 36px 0 50px; }
+      .hero-left, .hero-right { padding: 0 14px; }
+      .cat-section { padding: 32px 0; }
       .hero-actions { flex-direction: column; gap: 10px; }
       .btn-primary, .btn-gold { width: 100%; text-align: center; }
     }
