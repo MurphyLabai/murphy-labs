@@ -184,6 +184,38 @@
     .app-thumb-canvas,
     .app-thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s; }
     /* ─── CAROUSEL ─── */
+    .app-thumb-cta {
+      position: absolute; bottom: 10px; right: 10px;
+      background: rgba(0,0,0,0.65); color: #fff;
+      font-size: 0.68rem; font-weight: 600;
+      padding: 4px 9px; border-radius: 20px;
+      pointer-events: none; z-index: 5;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .app-card:hover .app-thumb-cta { opacity: 1; }
+    @media (hover: none) { .app-thumb-cta { opacity: 1; } }
+    /* ─── TERMS CONSENT ─── */
+    #terms-consent {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(135deg, rgba(26,26,46,0.97), rgba(45,45,90,0.97));
+      backdrop-filter: blur(12px); border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 16px 20px; z-index: 400; display: none;
+      align-items: center; justify-content: space-between; gap: 16px;
+    }
+    #terms-consent.show { display: flex; }
+    .terms-text { color: rgba(255,255,255,0.85); font-size: 0.78rem; line-height: 1.5; flex: 1; }
+    .terms-text a { color: var(--gold-light); text-decoration: none; border-bottom: 1px solid rgba(196,155,48,0.4); }
+    .terms-text a:hover { color: var(--gold); }
+    .terms-actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .terms-btn {
+      padding: 9px 18px; border-radius: 8px; font-size: 0.78rem; font-weight: 700;
+      cursor: pointer; border: none; transition: all 0.2s;
+    }
+    .terms-btn.accept { background: var(--gold); color: #fff; }
+    .terms-btn.accept:hover { background: #b88a28; }
+    .terms-btn.more { background: transparent; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.2); }
+    .terms-btn.more:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+
     .app-cat-badge {
       position: absolute; top: 10px; left: 10px;
       width: 22px; height: 22px; border-radius: 50%;
@@ -508,6 +540,7 @@
       <div class="app-thumb-wrap" id="thumb-slot">
         <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
+        <div class="app-thumb-cta">▶ Use free →</div>
       </div>
       <div class="app-body">
         <div class="app-name">5 Reel Slot Selector</div>
@@ -868,6 +901,19 @@
   </div>
 </footer>
 
+<!-- ─── TERMS CONSENT ─── -->
+<div id="terms-consent">
+  <p class="terms-text">
+    By using Murphy Labs, you agree to our
+    <a href="#" onclick="window.open('https://promoplay.ca/terms','_blank'); return false;">Terms of Service</a> and
+    <a href="#" onclick="window.open('https://promoplay.ca/privacy','_blank'); return false;">Privacy Policy</a>.
+  </p>
+  <div class="terms-actions">
+    <button class="terms-btn accept" onclick="acceptTerms()">Accept &amp; Continue</button>
+    <button class="terms-btn more" onclick="window.open('https://promoplay.ca/terms','_blank')">Read More</button>
+  </div>
+</div>
+
 <!-- ─── APP VIEWER ─── -->
 <div id="app-viewer">
   <div class="viewer-bar">
@@ -1163,7 +1209,19 @@ function triggerMegaFullscreen(){
   try { iframe.contentWindow.postMessage('megaFullscreen', '*'); } catch(e){}
 }
 
+function acceptTerms(){
+  try { localStorage.setItem('pp_terms_accepted', '1'); } catch(e){}
+  document.getElementById('terms-consent').classList.remove('show');
+}
+
 function openApp(id, name, tier, url) {
+  // Show terms consent if not yet accepted
+  try {
+    if(localStorage.getItem('pp_terms_accepted') !== '1'){
+      document.getElementById('terms-consent').classList.add('show');
+    }
+  } catch(e){}
+
   const viewer = document.getElementById('app-viewer');
   const iframe = document.getElementById('app-iframe');
   const loader = document.getElementById('iframe-loading');
