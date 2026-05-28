@@ -32,6 +32,8 @@
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
+      margin: 0;
+      min-width: 320px;
     }
     body.iframe-open { overflow: hidden; }
 
@@ -401,17 +403,20 @@
     @media (max-width: 900px) {
       nav { padding: 12px 24px; } .nav-links { display: none; }
       .hero { grid-template-columns: 1fr; gap: 36px; padding: 50px 24px 50px; }
-      .cat-section { padding: 40px 24px; }
+      .cat-section { padding: 40px 20px; }
       .cat-scroll { gap: 12px; } .app-card { width: 190px; }
       .footer-top { grid-template-columns: 1fr 1fr; }
       .footer-bottom { flex-direction: column; gap: 10px; }
-      .section-divider { padding: 0 24px; }
+      .section-divider { padding: 0 20px; }
     }
     @media (max-width: 600px) {
       .hero-stats { grid-template-columns: repeat(3, 1fr); }
       .app-card { width: 170px; }
       .footer-top { grid-template-columns: 1fr; }
       .viewer-bar { padding: 10px 16px; }
+      .hero { padding: 40px 16px 50px; }
+      .cat-section { padding: 36px 14px; }
+      .section-divider { padding: 0 14px; }
     }
   </style>
 </head>
