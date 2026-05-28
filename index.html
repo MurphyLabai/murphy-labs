@@ -221,8 +221,9 @@
     #app-viewer.open { display: flex; }
     .viewer-bar {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 11px 24px; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+      padding: 11px 16px; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--card-border); z-index: 10; flex-shrink: 0;
+      width: 100%; overflow: hidden; max-width: 100%;
     }
     .viewer-left { display: flex; align-items: center; gap: 14px; }
     .viewer-back {
@@ -420,7 +421,12 @@
       .hero-stats { grid-template-columns: repeat(3, 1fr); }
       .app-card { width: 170px; }
       .footer-top { grid-template-columns: 1fr; }
-      .viewer-bar { padding: 10px 16px; }
+      .viewer-bar { padding: 10px 12px; gap: 8px; }
+      .viewer-left { gap: 8px; }
+      .viewer-right { gap: 6px; }
+      .viewer-back { padding: 6px 10px; font-size: 0.75rem; }
+      .viewer-mega, .viewer-pro-badge { padding: 6px 10px; font-size: 0.7rem; }
+      .viewer-close { padding: 6px 10px; font-size: 0.72rem; }
       .hero { padding: 36px 0 50px; }
       .hero-left, .hero-right { padding: 0 14px; }
       .cat-section { padding: 32px 0; }
