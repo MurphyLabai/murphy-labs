@@ -164,7 +164,7 @@
 
     /* App card */
     .app-card {
-      flex-shrink: 0; width: 280px;
+      flex-shrink: 0; width: 336px;
       background: var(--surface); border: 1.5px solid var(--card-border);
       border-radius: 16px; overflow: hidden; cursor: pointer;
       transition: all 0.25s; text-decoration: none; display: block;
@@ -178,7 +178,7 @@
     .app-card.coming-soon { opacity: 0.65; }
     .app-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--card-border); }
     .app-thumb-wrap {
-      position: relative; height: 187px; overflow: hidden;
+      position: relative; height: 224px; overflow: hidden;
       background: linear-gradient(135deg, #1a1a2e, #2d2d5a);
     }
     .app-thumb-canvas,
@@ -446,14 +446,14 @@
       .hero { grid-template-columns: 1fr; gap: 32px; padding: 40px 0 50px; max-width: 100%; margin: 0; border-radius: 0; }
       .hero-left, .hero-right { padding: 0 16px; }
       .cat-section { padding: 36px 0; }
-      .cat-scroll { gap: 12px; } .app-card { width: 240px; } .app-thumb-wrap { height: 160px; }
+      .cat-scroll { gap: 12px; } .app-card { width: 288px; } .app-thumb-wrap { height: 192px; }
       .footer-top { grid-template-columns: 1fr 1fr; }
       .footer-bottom { flex-direction: column; gap: 10px; }
       .section-divider { padding: 0 16px; }
     }
     @media (max-width: 600px) {
       .hero-stats { grid-template-columns: repeat(3, 1fr); }
-      .app-card { width: 200px; } .app-thumb-wrap { height: 133px; }
+      .app-card { width: 240px; } .app-thumb-wrap { height: 160px; }
       .footer-top { grid-template-columns: 1fr; }
       .viewer-bar { padding: 10px 12px; gap: 8px; }
       .viewer-left { gap: 8px; }
