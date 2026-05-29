@@ -431,7 +431,7 @@
     }
     @media (max-width: 900px) {
       nav { padding: 12px 20px; } .nav-links { display: none; }
-      .nav-actions .btn-pro-badge { display: none; }
+      .nav-actions .btn-pro-badge, .nav-actions .nav-sponsors { display: none; }
       .hero { grid-template-columns: 1fr; gap: 32px; padding: 40px 0 50px; max-width: 100%; margin: 0; border-radius: 0; }
       .hero-left, .hero-right { padding: 0 16px; }
       .cat-section { padding: 36px 0; }
@@ -476,9 +476,12 @@
     <a href="#random-picker">Random Picker</a>
     <a href="#simulation">Simulation</a>
     <a href="#giveaway">Giveaway Tools</a>
-    <a href="#coming-soon">Coming Soon</a>
   </div>
   <div class="nav-actions">
+    <div class="nav-sponsors">
+      <a href="#" class="sponsor-btn" title="Sponsor with us">Your Ad Here</a>
+      <a href="#" class="sponsor-btn" title="Sponsor with us">Your Ad Here</a>
+    </div>
     <a href="#" class="btn-login" onclick="openAuth('login')">Sign In</a>
     <a href="#" class="btn-register" onclick="openAuth('register')">Register</a>
     <a href="#" class="btn-pro-badge" onclick="openAuth('register')">PRO $4.99</a>
@@ -525,7 +528,7 @@
   </div>
   <div class="cat-scroll">
     <!-- 5 Reel Slot Selector -->
-    <div class="app-card app-carousel" data-images="slot-selector-1.png|slot-selector-2.png|slot-selector-3.png|slot-selector-4.png|slot-selector-5.png" onclick="openApp('slot-selector','5 Reel Slot Selector','free','http://192.168.1.120:3044')">
+    <div class="app-card app-carousel" data-app-id="slot-selector" data-images="slot-selector-1.png|slot-selector-2.png|slot-selector-3.png|slot-selector-4.png|slot-selector-5.png" onclick="openApp('slot-selector','5 Reel Slot Selector','free','http://192.168.1.120:3044')">
       <div class="app-thumb-wrap" id="thumb-slot">
         <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
@@ -546,7 +549,7 @@
       </div>
     </div>
     <!-- Coin Toss -->
-    <div class="app-card app-carousel" data-images="coin-toss-1.png|coin-toss-2.png|coin-toss-3.png|coin-toss-4.png|coin-toss-5.png" onclick="openApp('coin-toss','Coin Toss','free','http://192.168.1.120:3003')">
+    <div class="app-card app-carousel" data-app-id="coin-toss" data-images="coin-toss-1.png|coin-toss-2.png|coin-toss-3.png|coin-toss-4.png|coin-toss-5.png" onclick="openApp('coin-toss','Coin Toss','free','http://192.168.1.120:3003')">
       <div class="app-thumb-wrap" id="thumb-coin">
         <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
@@ -586,7 +589,7 @@
   </div>
   <div class="cat-scroll">
     <!-- Dice Roller -->
-    <div class="app-card app-carousel" data-images="dice-roller-1.png|dice-roller-2.png|dice-roller-3.png" onclick="openApp('dice-roller','Dice Roller','free','http://192.168.1.120:3002')">
+    <div class="app-card app-carousel" data-app-id="dice-roller" data-images="dice-roller-1.png|dice-roller-2.png|dice-roller-3.png" onclick="openApp('dice-roller','Dice Roller','free','http://192.168.1.120:3002')">
       <div class="app-thumb-wrap" id="thumb-dice">
         <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
@@ -607,7 +610,7 @@
       </div>
     </div>
     <!-- Card Flip -->
-    <div class="app-card app-carousel" data-images="card-flip-1.png|card-flip-2.png|card-flip-3.png|card-flip-4.png" onclick="openApp('card-flip','Card Flip','free','http://192.168.1.120:3041')">
+    <div class="app-card app-carousel" data-app-id="card-flip" data-images="card-flip-1.png|card-flip-2.png|card-flip-3.png|card-flip-4.png" onclick="openApp('card-flip','Card Flip','free','http://192.168.1.120:3041')">
       <div class="app-thumb-wrap" id="thumb-card">
         <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
@@ -647,7 +650,7 @@
   </div>
   <div class="cat-scroll">
     <!-- NameXtractor -->
-    <div class="app-card" onclick="openApp('name-extractor','NameXtractor','free','http://192.168.1.120:3001')">
+    <div class="app-card" data-app-id="name-extractor" onclick="openApp('name-extractor','NameXtractor','free','http://192.168.1.120:3001')">
       <div class="app-thumb-wrap" id="thumb-namex">
         <img class="app-thumb-img" src="name-extractor-thumb.png" alt="NameXtractor"/>
         <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
@@ -669,7 +672,7 @@
       </div>
     </div>
     <!-- Promo Pilot Lite -->
-    <div class="app-card" onclick="openApp('promo-pilot-lite','Promo Pilot Lite','free','https://promoplay.ca/promo-pilot')">
+    <div class="app-card" data-app-id="promo-pilot-lite" onclick="openApp('promo-pilot-lite','Promo Pilot Lite','free','https://promoplay.ca/promo-pilot')">
       <div class="app-thumb-wrap" id="thumb-pplite">
         <img class="app-thumb-img" src="promo-pilot-free-thumb.png" alt="Promo Pilot Lite"/>
         <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
@@ -691,7 +694,7 @@
       </div>
     </div>
     <!-- Promo Pilot Pro -->
-    <div class="app-card" onclick="window.open('https://promoplay.ca/promo-pilot-pro','_blank')">
+    <div class="app-card" data-app-id="promo-pilot-pro" onclick="window.open('https://promoplay.ca/promo-pilot-pro','_blank')">
       <div class="app-thumb-wrap" id="thumb-pppro">
         <img class="app-thumb-img" src="promo-pilot-free-thumb.png" alt="Promo Pilot Pro"/>
         <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
@@ -712,29 +715,13 @@
         <span class="app-upgrade" style="color:var(--cat-gold);">$4.99/mo</span>
       </div>
     </div>
-  </div>
-</section>
 
-<hr class="divider section-divider">
-
-<!-- ─── COMING SOON ─── -->
-<section class="cat-section" id="coming-soon">
-  <div class="cat-header">
-    <div>
-      <div class="cat-label-row">
-        <div class="cat-dot" style="background:var(--cat-soon);"></div>
-        <span class="cat-label-text" style="color:var(--cat-soon);">Category</span>
-      </div>
-      <h2 class="cat-title">Coming Soon</h2>
-      <p class="cat-sub">The roadmap ahead — all tools launching soon.</p>
-    </div>
-  </div>
-  <div class="cat-scroll">
+    <!-- Coming Soon apps in Giveaway Tools row -->
     <div class="app-card coming-soon">
       <div class="app-thumb-wrap" id="thumb-3reel">
         <img class="app-thumb-img" src="slot-3-reel-thumb.png" alt="3 Reel Slot"/>
         <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
-        <div class="app-badge coming">SOON</div>
+        <div class="app-badge coming">COMING SOON</div>
       </div>
       <div class="app-body">
         <div class="app-name">3 Reel Slot Selector</div>
@@ -749,7 +736,7 @@
       <div class="app-thumb-wrap" id="thumb-wheel">
         <img class="app-thumb-img" src="wheel-thumb.png" alt="Big Spin Wheel"/>
         <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;">◆</div>
-        <div class="app-badge coming">SOON</div>
+        <div class="app-badge coming">COMING SOON</div>
       </div>
       <div class="app-body">
         <div class="app-name">Big Spin Wheel</div>
@@ -764,7 +751,7 @@
       <div class="app-thumb-wrap" id="thumb-elim">
         <img class="app-thumb-img" src="elimination-thumb.png" alt="Elimination Wheel"/>
         <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
-        <div class="app-badge coming">SOON</div>
+        <div class="app-badge coming">COMING SOON</div>
       </div>
       <div class="app-body">
         <div class="app-name">Elimination Wheel</div>
@@ -776,25 +763,10 @@
       <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
     </div>
     <div class="app-card coming-soon">
-      <div class="app-thumb-wrap" id="thumb-races">
-        <img class="app-thumb-img" src="off-to-races-thumb.png" alt="Off to the Races"/>
-        <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;">◆</div>
-        <div class="app-badge coming">SOON</div>
-      </div>
-      <div class="app-body">
-        <div class="app-name">Off to the Races</div>
-        <div class="app-features">
-          <div class="app-feature locked"><span class="lock">🔒</span> Horse racing sim</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Live odds</div>
-        </div>
-      </div>
-      <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
-    </div>
-    <div class="app-card coming-soon">
       <div class="app-thumb-wrap" id="thumb-tourney">
         <img class="app-thumb-img" src="tourney-thumb.png" alt="Tourney Bracket Sim"/>
         <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
-        <div class="app-badge coming">SOON</div>
+        <div class="app-badge coming">COMING SOON</div>
       </div>
       <div class="app-body">
         <div class="app-name">Tourney Bracket Sim</div>
@@ -809,7 +781,7 @@
       <div class="app-thumb-wrap" id="thumb-slices">
         <img class="app-thumb-img" src="wheel-slices-thumb.png" alt="Wheel of Slices"/>
         <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
-        <div class="app-badge coming">SOON</div>
+        <div class="app-badge coming">COMING SOON</div>
       </div>
       <div class="app-body">
         <div class="app-name">Wheel of Slices</div>
@@ -820,23 +792,10 @@
       </div>
       <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
     </div>
-    <div class="app-card coming-soon">
-      <div class="app-thumb-wrap" id="thumb-fishing">
-        <img class="app-thumb-img" src="tourney-thumb.png" alt="Fishing Derby Sim"/>
-        <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;">◆</div>
-        <div class="app-badge coming">SOON</div>
-      </div>
-      <div class="app-body">
-        <div class="app-name">Fishing Derby Sim</div>
-        <div class="app-features">
-          <div class="app-feature locked"><span class="lock">🔒</span> Catch contest</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Leaderboard</div>
-        </div>
-      </div>
-      <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
-    </div>
   </div>
 </section>
+
+<!-- COMING SOON apps moved into category rows -->
 
 <!-- ─── FEATURE BANNER ─── -->
 <section class="feature-banner">
@@ -1245,6 +1204,10 @@ function closeViewer() {
   currentAppId = '';
 }
 
+// ─── FEATURED APP OF THE MONTH ───
+const FEATURED_APP_ID = ''; // e.g. 'slot-selector' — set to '' to disable
+const FEATURED_MONTH_LABEL = '★ This Month: Unlocked Free';
+
 // ─── AUTH ───
 function openAuth(tab){ document.getElementById('auth-modal').classList.add('open'); switchAuthTab(tab); }
 function closeAuth(){ document.getElementById('auth-modal').classList.remove('open'); }
@@ -1292,6 +1255,18 @@ document.getElementById('mega-nudge').addEventListener('click', e=>{ if(e.target
 // ─── INIT ───
 window.addEventListener('DOMContentLoaded', () => {
   initCarousels();
+  // Apply featured app label
+  if(FEATURED_APP_ID){
+    const feat = document.querySelector(`[data-app-id="${FEATURED_APP_ID}"]`);
+    if(feat){
+      const badge = feat.querySelector('.app-badge');
+      if(badge){
+        badge.textContent = FEATURED_MONTH_LABEL.split(':')[0];
+        badge.style.cssText = 'background:var(--gold);color:#fff;font-size:0.5rem;white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis;';
+        badge.className = 'app-badge';
+      }
+    }
+  }
 });
 
 // ─── CAROUSEL ───
