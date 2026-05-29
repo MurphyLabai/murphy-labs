@@ -183,17 +183,6 @@
     }
     .app-thumb-canvas,
     .app-thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s; }
-    /* ─── CAROUSEL ─── */
-    .app-thumb-cta {
-      position: absolute; bottom: 10px; right: 10px;
-      background: rgba(0,0,0,0.65); color: #fff;
-      font-size: 0.68rem; font-weight: 600;
-      padding: 4px 9px; border-radius: 20px;
-      pointer-events: none; z-index: 5;
-      opacity: 0; transition: opacity 0.2s;
-    }
-    .app-card:hover .app-thumb-cta { opacity: 1; }
-    @media (hover: none) { .app-thumb-cta { opacity: 1; } }
     /* ─── TERMS CONSENT ─── */
     #terms-consent {
       position: fixed; bottom: 0; left: 0; right: 0;
@@ -540,7 +529,6 @@
       <div class="app-thumb-wrap" id="thumb-slot">
         <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
         <div class="app-badge free">FREE</div>
-        <div class="app-thumb-cta">▶ Use free →</div>
       </div>
       <div class="app-body">
         <div class="app-name">5 Reel Slot Selector</div>
