@@ -144,6 +144,25 @@
     .hero-stat .big { font-family: 'Audiowide', sans-serif; font-size: 1.4rem; color: var(--gold); display: block; line-height: 1; margin-bottom: 6px; }
     .hero-stat .label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
     .hero-stat.highlight { background: rgba(196,155,48,0.06); border-color: rgba(196,155,48,0.25); }
+    .hero-ads { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+    .sponsor-card {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.9); border: 1.5px solid rgba(196,155,48,0.35); border-radius: 14px;
+      padding: 12px 14px; text-decoration: none; color: inherit;
+      transition: all 0.2s; cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .sponsor-card:hover { border-color: var(--gold); background: #fff; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+    .sponsor-logo {
+      width: 46px; height: 46px; border-radius: 10px; background: rgba(196,155,48,0.1);
+      border: 2px solid var(--gold-border); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.55rem; color: rgba(196,155,48,0.7); font-weight: 700; text-align: center; line-height: 1.2;
+    }
+    .sponsor-info { flex: 1; min-width: 0; }
+    .sponsor-name { font-size: 0.75rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .sponsor-desc { font-size: 0.62rem; color: var(--muted); line-height: 1.3; margin-bottom: 3px; }
+    .sponsor-cta { font-size: 0.6rem; color: var(--gold); font-weight: 700; }
 
     /* ─── CATEGORY SECTIONS ─── */
     .cat-section { padding: 56px 48px; max-width: 1300px; margin: 0 auto; }
@@ -431,7 +450,7 @@
     }
     @media (max-width: 900px) {
       nav { padding: 12px 20px; } .nav-links { display: none; }
-      .nav-actions .btn-pro-badge, .nav-actions .nav-sponsors { display: none; }
+      .nav-actions .btn-pro-badge { display: none; }
       .hero { grid-template-columns: 1fr; gap: 32px; padding: 40px 0 50px; max-width: 100%; margin: 0; border-radius: 0; }
       .hero-left, .hero-right { padding: 0 16px; }
       .cat-section { padding: 36px 0; }
@@ -478,10 +497,6 @@
     <a href="#giveaway">Giveaway Tools</a>
   </div>
   <div class="nav-actions">
-    <div class="nav-sponsors">
-      <a href="#" class="sponsor-btn" title="Sponsor with us">Your Ad Here</a>
-      <a href="#" class="sponsor-btn" title="Sponsor with us">Your Ad Here</a>
-    </div>
     <a href="#" class="btn-login" onclick="openAuth('login')">Sign In</a>
     <a href="#" class="btn-register" onclick="openAuth('register')">Register</a>
     <a href="#" class="btn-pro-badge" onclick="openAuth('register')">PRO $4.99</a>
@@ -648,6 +663,22 @@
         <span class="app-upgrade">🔓 Unlock all</span>
       </div>
     </div>
+    <!-- Coming Soon: Tourney Bracket Sim -->
+    <div class="app-card coming-soon">
+      <div class="app-thumb-wrap" id="thumb-tourney">
+        <img class="app-thumb-img" src="tourney-thumb.png" alt="Tourney Bracket Sim"/>
+        <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
+        <div class="app-badge coming">COMING SOON</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Tourney Bracket Sim</div>
+        <div class="app-features">
+          <div class="app-feature locked"><span class="lock">🔒</span> Bracket builder</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Auto advancement</div>
+        </div>
+      </div>
+      <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
+    </div>
   </div>
 </section>
 
@@ -667,6 +698,71 @@
     <a href="#giveaway" class="cat-viewall">View all →</a>
   </div>
   <div class="cat-scroll">
+
+    <!-- Coming Soon: 3 Reel Slot -->
+    <div class="app-card coming-soon">
+      <div class="app-thumb-wrap" id="thumb-3reel">
+        <img class="app-thumb-img" src="slot-3-reel-thumb.png" alt="3 Reel Slot"/>
+        <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
+        <div class="app-badge coming">COMING SOON</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">3 Reel Slot Selector</div>
+        <div class="app-features">
+          <div class="app-feature locked"><span class="lock">🔒</span> Classic slot feel</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Fast spins</div>
+        </div>
+      </div>
+      <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
+    </div>
+    <!-- Coming Soon: Big Spin Wheel -->
+    <div class="app-card coming-soon">
+      <div class="app-thumb-wrap" id="thumb-wheel">
+        <img class="app-thumb-img" src="wheel-thumb.png" alt="Big Spin Wheel"/>
+        <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;">◆</div>
+        <div class="app-badge coming">COMING SOON</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Big Spin Wheel</div>
+        <div class="app-features">
+          <div class="app-feature locked"><span class="lock">🔒</span> Custom segments</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Sound effects</div>
+        </div>
+      </div>
+      <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
+    </div>
+    <!-- Coming Soon: Elimination Wheel -->
+    <div class="app-card coming-soon">
+      <div class="app-thumb-wrap" id="thumb-elim">
+        <img class="app-thumb-img" src="elimination-thumb.png" alt="Elimination Wheel"/>
+        <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
+        <div class="app-badge coming">COMING SOON</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Elimination Wheel</div>
+        <div class="app-features">
+          <div class="app-feature locked"><span class="lock">🔒</span> Knockout rounds</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Team mode</div>
+        </div>
+      </div>
+      <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
+    </div>
+    <!-- Coming Soon: Wheel of Slices -->
+    <div class="app-card coming-soon">
+      <div class="app-thumb-wrap" id="thumb-slices">
+        <img class="app-thumb-img" src="wheel-slices-thumb.png" alt="Wheel of Slices"/>
+        <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
+        <div class="app-badge coming">COMING SOON</div>
+      </div>
+      <div class="app-body">
+        <div class="app-name">Wheel of Slices</div>
+        <div class="app-features">
+          <div class="app-feature locked"><span class="lock">🔒</span> Custom slices</div>
+          <div class="app-feature locked"><span class="lock">🔒</span> Weighted odds</div>
+        </div>
+      </div>
+      <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
+    </div>
     <!-- NameXtractor -->
     <div class="app-card" data-app-id="name-extractor" onclick="openApp('name-extractor','NameXtractor','free','http://192.168.1.120:3001')">
       <div class="app-thumb-wrap" id="thumb-namex">
@@ -733,81 +829,6 @@
     </div>
 
     <!-- Coming Soon apps in Giveaway Tools row -->
-    <div class="app-card coming-soon">
-      <div class="app-thumb-wrap" id="thumb-3reel">
-        <img class="app-thumb-img" src="slot-3-reel-thumb.png" alt="3 Reel Slot"/>
-        <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
-        <div class="app-badge coming">COMING SOON</div>
-      </div>
-      <div class="app-body">
-        <div class="app-name">3 Reel Slot Selector</div>
-        <div class="app-features">
-          <div class="app-feature locked"><span class="lock">🔒</span> Classic slot feel</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Fast spins</div>
-        </div>
-      </div>
-      <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
-    </div>
-    <div class="app-card coming-soon">
-      <div class="app-thumb-wrap" id="thumb-wheel">
-        <img class="app-thumb-img" src="wheel-thumb.png" alt="Big Spin Wheel"/>
-        <div class="app-cat-badge" style="background:var(--cat-blue);color:#fff;">◆</div>
-        <div class="app-badge coming">COMING SOON</div>
-      </div>
-      <div class="app-body">
-        <div class="app-name">Big Spin Wheel</div>
-        <div class="app-features">
-          <div class="app-feature locked"><span class="lock">🔒</span> Custom segments</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Sound effects</div>
-        </div>
-      </div>
-      <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
-    </div>
-    <div class="app-card coming-soon">
-      <div class="app-thumb-wrap" id="thumb-elim">
-        <img class="app-thumb-img" src="elimination-thumb.png" alt="Elimination Wheel"/>
-        <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
-        <div class="app-badge coming">COMING SOON</div>
-      </div>
-      <div class="app-body">
-        <div class="app-name">Elimination Wheel</div>
-        <div class="app-features">
-          <div class="app-feature locked"><span class="lock">🔒</span> Knockout rounds</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Team mode</div>
-        </div>
-      </div>
-      <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
-    </div>
-    <div class="app-card coming-soon">
-      <div class="app-thumb-wrap" id="thumb-tourney">
-        <img class="app-thumb-img" src="tourney-thumb.png" alt="Tourney Bracket Sim"/>
-        <div class="app-cat-badge" style="background:var(--cat-purple);color:#fff;">◆</div>
-        <div class="app-badge coming">COMING SOON</div>
-      </div>
-      <div class="app-body">
-        <div class="app-name">Tourney Bracket Sim</div>
-        <div class="app-features">
-          <div class="app-feature locked"><span class="lock">🔒</span> Bracket builder</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Auto advancement</div>
-        </div>
-      </div>
-      <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
-    </div>
-    <div class="app-card coming-soon">
-      <div class="app-thumb-wrap" id="thumb-slices">
-        <img class="app-thumb-img" src="wheel-slices-thumb.png" alt="Wheel of Slices"/>
-        <div class="app-cat-badge" style="background:var(--cat-gold);color:#fff;">◆</div>
-        <div class="app-badge coming">COMING SOON</div>
-      </div>
-      <div class="app-body">
-        <div class="app-name">Wheel of Slices</div>
-        <div class="app-features">
-          <div class="app-feature locked"><span class="lock">🔒</span> Custom slices</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Weighted odds</div>
-        </div>
-      </div>
-      <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
-    </div>
   </div>
 </section>
 
