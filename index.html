@@ -504,6 +504,8 @@
 
     @media (max-width: 900px) {
       html, body { overflow-x: hidden; width: 100vw; max-width: 100vw; }
+      .hero-right { flex-direction: column; align-items: stretch; }
+      .featured-app-box { width: 100%; max-width: 100%; }
       html { margin-left: 0; margin-right: 0; }
     }
     @media (max-width: 900px) {
@@ -563,6 +565,11 @@
       .section-divider { padding: 0 16px; }
     }
     @media (max-width: 600px) {
+      .hero-right { flex-direction: column; align-items: stretch; gap: 0; }
+      .featured-app-box { width: 100%; max-width: 100%; border-radius: 0; margin-bottom: 12px; }
+      .featured-header { padding: 14px 16px; }
+      .featured-actions { padding: 14px 16px; }
+      .hero-ads { margin-top: 0; }
       .hero-stats { grid-template-columns: repeat(3, 1fr); }
       .app-card { width: 240px; } .app-thumb-wrap { height: 160px; }
       .footer-top { grid-template-columns: 1fr; }
