@@ -199,7 +199,7 @@
     .hero-stat .big { font-family: 'Audiowide', sans-serif; font-size: 1.4rem; color: var(--gold); display: block; line-height: 1; margin-bottom: 6px; }
     .hero-stat .label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
     .hero-stat.highlight { background: rgba(196,155,48,0.06); border-color: rgba(196,155,48,0.25); }
-    .hero-ads { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+    .sponsors-column { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
     .sponsor-card {
       display: flex; align-items: center; gap: 12px;
       background: rgba(255,255,255,0.9); border: 1.5px solid rgba(196,155,48,0.35); border-radius: 14px;
@@ -570,7 +570,7 @@
       .featured-thumb-wrap { aspect-ratio: 16/9; }
       .featured-header { padding: 16px; }
       .featured-actions { padding: 16px; }
-      .hero-ads { display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; gap: 8px !important; margin-top: 0 !important; }
+      .sponsors-column { display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; gap: 8px !important; margin-top: 0 !important; }
       .sponsor-card { flex: 1; min-width: 140px; }
       .hero-stats { grid-template-columns: repeat(3, 1fr); }
       .app-card { width: 240px; } .app-thumb-wrap { height: 160px; }
@@ -647,8 +647,7 @@
         </div>
       </div>
 
-    <div class="hero-ads">
-      <a href="#" class="sponsor-card" title="Advertise with us">
+    <div class="sponsors-column"><a href="#" class="sponsor-card" title="Advertise with us">
         <div class="sponsor-logo">Your Logo</div>
         <div class="sponsor-info">
           <div class="sponsor-name">Sponsor Name</div>
@@ -663,8 +662,7 @@
           <div class="sponsor-desc">Short description of your brand or offer.</div>
           <div class="sponsor-cta">Visit us →</div>
         </div>
-      </a>
-    </div>
+      </a></div>       
   </div>
 </section>
 
