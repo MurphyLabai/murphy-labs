@@ -145,6 +145,10 @@
       position: relative;
       background: #0a0a14;
     }
+    .featured-thumb-wrap { position: relative; width: 100%; aspect-ratio: 3/2; overflow: hidden; background: #0a0a14; }
+    .app-carousel-track { width: 100%; height: 100%; position: relative; }
+    .carousel-img-wrap { position: absolute; inset: 0; }
+    .carousel-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .featured-thumb-img {
       width: 100%;
       height: 100%;
@@ -623,7 +627,26 @@
         <div class="featured-header-sub">Fully Unlocked Free</div>
       </div>
       <div class="featured-thumb-wrap">
-        <img src="public/img/slot-selector-1.png" alt="5 Reel Slot Selector" class="featured-thumb-img" />
+        <div class="app-carousel-track" id="featured-carousel" data-images="slot-selector-1.png|slot-selector-2.png|slot-selector-3.png|slot-selector-4.png|slot-selector-5.png">
+          <div class="carousel-img-wrap">
+            <img src="public/img/slot-selector-1.png" class="carousel-img" style="opacity:1" alt="5 Reel Slot Selector" />
+          </div>
+          <div class="carousel-img-wrap" style="display:none">
+            <img src="public/img/slot-selector-2.png" class="carousel-img" alt="" />
+          </div>
+          <div class="carousel-img-wrap" style="display:none">
+            <img src="public/img/slot-selector-3.png" class="carousel-img" alt="" />
+          </div>
+          <div class="carousel-img-wrap" style="display:none">
+            <img src="public/img/slot-selector-4.png" class="carousel-img" alt="" />
+          </div>
+          <div class="carousel-img-wrap" style="display:none">
+            <img src="public/img/slot-selector-5.png" class="carousel-img" alt="" />
+          </div>
+        </div>
+        <div class="app-badge free" style="position:absolute;top:10px;left:10px;z-index:5;">FREE</div>
+        <div class="carousel-prev" id="featured-prev" style="position:absolute;left:6px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.45);border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;z-index:5;color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;">&#8249;</div>
+        <div class="carousel-next" id="featured-next" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.45);border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;z-index:5;color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;">&#8250;</div>
       </div>
       <div class="featured-actions">
         <a href="#" class="btn-featured" onclick="openApp('slot-selector','5 Reel Slot Selector','free','http://192.168.1.120:3044')">Use free &#8594;</a>
@@ -1506,6 +1529,34 @@ document.getElementById('mega-nudge').addEventListener('click', e=>{ if(e.target
 // ─── INIT ───
 window.addEventListener('DOMContentLoaded', () => {
   initCarousels();
+
+  // Featured app carousel
+  const featCarousel = document.getElementById('featured-carousel');
+  if (featCarousel) {
+    const images = featCarousel.dataset.images.split('|');
+    if (images.length > 1) {
+      let cur = 0;
+      const imgs = featCarousel.querySelectorAll('.carousel-img-wrap');
+      const prevBtn = document.getElementById('featured-prev');
+      const nextBtn = document.getElementById('featured-next');
+      function showImg(idx) {
+        imgs.forEach((el, i) => { el.style.display = i === idx ? 'flex' : 'none'; });
+      }
+      if (prevBtn) prevBtn.addEventListener('click', () => {
+        cur = (cur - 1 + images.length) % images.length;
+        showImg(cur);
+      });
+      if (nextBtn) nextBtn.addEventListener('click', () => {
+        cur = (cur + 1) % images.length;
+        showImg(cur);
+      });
+      // Auto advance
+      setInterval(() => {
+        cur = (cur + 1) % images.length;
+        showImg(cur);
+      }, 4000);
+    }
+  }
   // Apply featured app label
   if(FEATURED_APP_ID){
     const feat = document.querySelector(`[data-app-id="${FEATURED_APP_ID}"]`);
@@ -1522,6 +1573,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // ─── CAROUSEL ───
 function initCarousels(){
+  // Main app carousels
   document.querySelectorAll('.app-carousel').forEach(card => {
     const images = card.dataset.images.split('|');
     if(images.length <= 1) return;
