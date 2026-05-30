@@ -565,11 +565,13 @@
       .section-divider { padding: 0 16px; }
     }
     @media (max-width: 600px) {
-      .hero-right { flex-direction: column; align-items: stretch; gap: 0; }
-      .featured-app-box { width: 100%; max-width: 100%; border-radius: 0; margin-bottom: 12px; }
-      .featured-header { padding: 14px 16px; }
-      .featured-actions { padding: 14px 16px; }
-      .hero-ads { margin-top: 0; }
+      .hero-right { flex-direction: column !important; align-items: stretch !important; gap: 0 !important; display: flex !important; }
+      .featured-app-box { width: 100% !important; max-width: 100% !important; border-radius: 0 !important; margin-bottom: 10px; }
+      .featured-thumb-wrap { aspect-ratio: 16/9; }
+      .featured-header { padding: 16px; }
+      .featured-actions { padding: 16px; }
+      .hero-ads { display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; gap: 8px !important; margin-top: 0 !important; }
+      .sponsor-card { flex: 1; min-width: 140px; }
       .hero-stats { grid-template-columns: repeat(3, 1fr); }
       .app-card { width: 240px; } .app-thumb-wrap { height: 160px; }
       .footer-top { grid-template-columns: 1fr; }
