@@ -121,6 +121,7 @@
       width: 100%;
       border-radius: 20px;
       overflow: hidden;
+      box-shadow: 0 0 0 2px rgba(124,111,255,0.3), 0 0 34px rgba(124,111,255,0.22), 0 0 70px rgba(124,111,255,0.1);
     }
     .featured-month-badge {
       font-family: 'Audiowide', sans-serif;
@@ -265,7 +266,9 @@
       min-width: 53px;
       text-align: center;
     }
-    .app-open-btn img { display: inline-block; vertical-align: middle; height: 18px; width: auto; }
+    .app-open-btn-wrap { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; }
+    .app-open-btn-wrap img { display: inline-block; height: 35px; width: auto; }
+    .app-open-btn-wrap span { font-size: 0.48rem; color: var(--cat-purple); font-weight: 700; letter-spacing: 0.3px; white-space: nowrap; }
 
 
     .app-body { padding: 14px 16px 16px; }
@@ -647,7 +650,7 @@
         </div>
         <div class="app-footer">
           <span class="app-use-free">Use free →</span>
-          <img class="app-open-btn" src="img/open-btn.png" alt="Open">
+          <div class="app-open-btn-wrap"><span>Unlock All</span><img src="img/open-btn.png" alt="Open"></div>
         </div>
       </div>
     </div>
@@ -702,7 +705,7 @@
       </div>
       <div class="app-footer">
         <span class="app-use-free">Use free →</span>
-        <img class="app-open-btn" src="img/open-btn.png" alt="Open">
+        <div class="app-open-btn-wrap"><span>Unlock All</span><img src="img/open-btn.png" alt="Open"></div>
       </div>
     </div>
     <!-- Coin Toss -->
@@ -723,7 +726,7 @@
       </div>
       <div class="app-footer">
         <span class="app-use-free">Use free →</span>
-        <img class="app-open-btn" src="img/open-btn.png" alt="Open">
+        <div class="app-open-btn-wrap"><span>Unlock All</span><img src="img/open-btn.png" alt="Open"></div>
       </div>
     </div>
     <!-- Coming Soon: 3 Reel Slot -->
@@ -874,7 +877,7 @@
       </div>
       <div class="app-footer">
         <span class="app-use-free">Use free →</span>
-        <img class="app-open-btn" src="img/open-btn.png" alt="Open">
+        <div class="app-open-btn-wrap"><span>Unlock All</span><img src="img/open-btn.png" alt="Open"></div>
       </div>
     </div>
     <!-- Card Flip -->
@@ -895,7 +898,7 @@
       </div>
       <div class="app-footer">
         <span class="app-use-free">Use free →</span>
-        <img class="app-open-btn" src="img/open-btn.png" alt="Open">
+        <div class="app-open-btn-wrap"><span>Unlock All</span><img src="img/open-btn.png" alt="Open"></div>
       </div>
     </div>
     <!-- Coming Soon: Tourney Bracket Sim -->
