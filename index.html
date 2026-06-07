@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -25,6 +25,38 @@
       --cat-blue: #3a6ef5;
       --cat-gold: #d4af37;
       --cat-soon: #9a9ab0;
+      --hero-bg-start: #fafbfc;
+      --hero-bg-end: #f0f1f5;
+      --featured-border: rgba(124,111,255,0.3);
+      --featured-glow: rgba(124,111,255,0.22);
+      --featured-glow-outer: rgba(124,111,255,0.1);
+      --nav-bg: rgba(255,255,255,0.97);
+      --card-outline: #6a6a7a;
+    }
+
+    [data-theme="dark"] {
+      --gold: #d4af37;
+      --gold-light: #f0d060;
+      --gold-border: #d4af37;
+      --bg: #080811;
+      --surface: #0f0f1a;
+      --card: #13131f;
+      --card-border: #1f1f35;
+      --text: #e0e0f0;
+      --text-secondary: #8888a8;
+      --muted: #5555a0;
+      --accent-blue: #3a6ef5;
+      --cat-purple: #7c6fff;
+      --cat-blue: #3a6ef5;
+      --cat-gold: #d4af37;
+      --cat-soon: #6a6a8a;
+      --hero-bg-start: #0d0d1a;
+      --hero-bg-end: #111120;
+      --featured-border: rgba(124,111,255,0.5);
+      --featured-glow: rgba(124,111,255,0.35);
+      --featured-glow-outer: rgba(124,111,255,0.15);
+      --nav-bg: rgba(13,13,26,0.97);
+      --card-outline: #8080c0;
     }
 
     body {
@@ -34,6 +66,8 @@
       overflow-x: hidden;
       margin: 0;
       min-width: 320px;
+      transition: background 0.3s, color 0.3s;
+      padding-top: 70px;
     }
     body.iframe-open { overflow: hidden; }
 
@@ -60,15 +94,19 @@
       align-items: center;
       justify-content: space-between;
       padding: 14px 48px;
-      background: rgba(255,255,255,0.97);
+      background: var(--nav-bg);
       backdrop-filter: blur(16px);
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 200;
       border-bottom: 1px solid var(--card-border);
+      transition: transform 0.3s ease, background 0.3s;
     }
+    body.nav-hidden nav { transform: translateY(-100%); }
     .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; cursor: pointer; }
-    .nav-logo-icon { width: 34px; height: 34px; }
+    .nav-logo-icon { width: 54px; height: 54px; }
     .nav-logo-text { font-family: 'Orbitron', sans-serif; color: var(--text); font-size: 0.88rem; font-weight: 700; letter-spacing: 1px; }
     .nav-logo-text span { color: var(--gold); }
     .nav-links { display: flex; gap: 26px; }
@@ -78,12 +116,14 @@
     .btn-login {
       background: transparent; border: 1.5px solid var(--card-border);
       color: var(--text-secondary); padding: 7px 18px; border-radius: 8px;
-      font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none;
+      font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none;
     }
     .btn-login:hover { border-color: var(--gold); color: var(--gold); }
+    #theme-toggle { border-radius: 8px; transition: background 0.2s; }
+    #theme-toggle:hover { background: rgba(128,128,128,0.15); }
     .btn-register {
       background: var(--gold); color: #fff; border: none; padding: 7px 18px;
-      border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;
+      border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer;
       transition: all 0.2s; text-decoration: none; box-shadow: 0 2px 8px rgba(196,155,48,0.25);
     }
     .btn-register:hover { background: #b88a28; transform: translateY(-1px); }
@@ -103,7 +143,7 @@
       padding: 80px 48px 70px;
       max-width: 1300px;
       margin: 0 auto;
-      background: linear-gradient(160deg, #fafbfc 0%, #f0f1f5 100%);
+      background: linear-gradient(160deg, var(--hero-bg-start) 0%, var(--hero-bg-end) 100%);
       width: 100%;
     }
     .hero-left { max-width: 420px; }
@@ -121,16 +161,17 @@
       width: 100%;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 0 0 2px rgba(124,111,255,0.3), 0 0 34px rgba(124,111,255,0.22), 0 0 70px rgba(124,111,255,0.1);
+      box-shadow: 0 0 0 2px var(--featured-border, rgba(124,111,255,0.3)), 0 0 34px var(--featured-glow, rgba(124,111,255,0.22)), 0 0 70px var(--featured-glow-outer, rgba(124,111,255,0.1));
     }
     .featured-month-badge {
       font-family: 'Audiowide', sans-serif;
-      font-size: 0.62rem;
+      font-size: 0.65rem;
       color: #7c6fff;
       letter-spacing: 0.12em;
       text-align: center;
       margin-bottom: 12px;
       text-transform: uppercase;
+      line-height: 1.4;
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 6px;
@@ -143,12 +184,28 @@
       line-height: 1.1; margin-bottom: 16px; color: var(--text);
     }
     .hero-left h1 span {
-      background: linear-gradient(135deg, var(--cat-purple), #9f8fff, var(--gold));
+      background: linear-gradient(135deg, var(--cat-purple), var(--cat-purple), var(--gold));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; display: block;
     }
     .hero-left p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.75; max-width: 440px; margin-bottom: 28px; }
-    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .diamond-cta {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 10px;
+    }
+    .diamond-cta img { height: 28px; width: auto; }
+    .diamond-cta-text { font-size: 0.82rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .diamond-cta-sub { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px; }
+    .diamond-cta-note { font-size: 0.68rem; color: var(--cat-purple); font-weight: 600; margin-bottom: 4px; }
+    .hero-mobile-divider {
+      display: none;
+      margin: 16px 0;
+      border: none;
+      border-top: 2px solid rgba(124,111,255,0.25);
+    }
+    @media (max-width: 600px) {
+      .hero-mobile-divider { display: block; }
+    }
     .btn-primary {
       background: linear-gradient(135deg, var(--cat-purple), #5a4ff5); color: #fff;
       padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 700;
@@ -210,18 +267,18 @@
     /* App card */
     .app-card {
       flex-shrink: 0; width: 336px;
-      background: var(--surface); border: 1.5px solid var(--card-border);
+      background: var(--surface); border: 2.5px solid var(--card-outline);
       border-radius: 16px; overflow: hidden; cursor: pointer;
       transition: all 0.25s; text-decoration: none; display: block;
     }
     .app-card:hover {
-      border-color: rgba(124,111,255,0.4); transform: translateY(-5px);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(124,111,255,0.1);
+      border-color: var(--card-outline); transform: translateY(-5px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.12), 0 4px 12px rgba(124,111,255,0.12);
     }
     .app-card:hover .app-thumb-img { transform: scale(1.04); }
     .app-card:hover .app-thumb-canvas { transform: scale(1.04); }
     .app-card.coming-soon { opacity: 0.65; }
-    .app-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--card-border); }
+    .app-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--card-outline); }
     .app-thumb-wrap {
       position: relative; height: 224px; overflow: hidden;
       background: linear-gradient(135deg, #1a1a2e, #2d2d5a);
@@ -598,11 +655,7 @@
 <!-- ─── NAV ─── -->
 <nav>
   <a href="#" class="nav-logo" onclick="closeViewer(); return false;">
-    <svg class="nav-logo-icon" viewBox="0 0 34 34" fill="none">
-      <rect width="34" height="34" rx="9" fill="url(#nlg)"/>
-      <text x="17" y="23" text-anchor="middle" font-family="Audiowide,sans-serif" font-size="15" font-weight="bold" fill="#fff">M</text>
-      <defs><linearGradient id="nlg" x1="0" y1="0" x2="34" y2="34"><stop offset="0%" stop-color="#7c6fff"/><stop offset="100%" stop-color="#d4af37"/></linearGradient></defs>
-    </svg>
+    <img class="nav-logo-icon" src="/img/nav-logo.png" alt="Logo">
     <span class="nav-logo-text">
           <span style="display:block;line-height:1.1;"><span style="color:#7c6fff;">PROMO</span><span style="color:var(--gold);">PLAY</span></span>
           <span style="display:block;color:var(--gold);font-size:0.65rem;letter-spacing:3px;">LABS</span>
@@ -614,8 +667,12 @@
     <a href="#giveaway">Giveaway Tools</a>
   </div>
   <div class="nav-actions">
+    <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode" style="background:none;border:none;cursor:pointer;padding:6px 8px;display:flex;align-items:center;font-size:1.2rem;line-height:1;">
+      <span id="theme-icon-light">🌙</span>
+      <span id="theme-icon-dark" style="display:none">☀️</span>
+    </button>
     <a href="#" class="btn-login" onclick="openAuth('login')">Sign In</a>
-    <a href="#" class="btn-register" onclick="openAuth('register')">Register</a>
+    <a href="#" class="btn-register" onclick="openAuth('register')">Sign Up</a>
     <a href="#" class="btn-pro-badge" onclick="openAuth('register')">PRO $4.99</a>
   </div>
 </nav>
@@ -623,16 +680,15 @@
 <!-- ─── HERO ─── -->
 <section class="hero">
   <div class="hero-left animate-in">
-    <div class="hero-badge">✦ Free AI-Powered Tools</div>
     <h1>Randomness,<br><span>Supercharged.</span></h1>
     <p>Slot selectors, dice rollers, coin flips, card draws - all free to use. Upload your own music, images, and themes with a Pro subscription.</p>
-    <div class="hero-actions">
-      <a href="#random-picker" class="btn-primary">Explore Tools</a>
-      <a href="#giveaway" class="btn-gold">Giveaway Suite</a>
-    </div>
+    <div class="diamond-cta-sub"><strong>All Diamond Apps Free to Use - Instantly, No Sign Up Required</strong></div>
+    <div class="diamond-cta-note"><strong>Sign Up Free to Unlock App of the Month's Custom Features!</strong></div>
+    <div class="diamond-cta-sub" style="margin-top:10px;"><img src="img/open-btn.png" alt="Diamond" style="height:29px;vertical-align:middle;margin-right:6px;"><strong>Unlock All Diamond Apps for $7/month</strong></div>
+    <hr class="hero-mobile-divider">
   </div>
   <div class="hero-center animate-in" style="animation-delay:0.15s;">
-    <div class="featured-month-badge">★ App of the Month — Unlocked Free This Month Only</div>
+    <div class="featured-month-badge">★ <span style="font-size:0.85rem;">App of the Month</span> ★<br><span style="color:var(--gold);font-size:0.62rem;">Custom Features Unlocked FREE All Month</span><br><span style="font-size:0.5rem;color:var(--cat-purple);">(Sign up free to unlock this App all Month)</span></div>
     <div class="featured-app-box" id="featured-app-box">
       <div class="app-card app-carousel" data-images="slot-selector-1.png|slot-selector-2.png|slot-selector-3.png|slot-selector-4.png|slot-selector-5.png" style="width:100%;border-radius:0;box-shadow:none;border:1.5px solid rgba(124,111,255,0.3);" onclick="openApp('slot-selector','5 Reel Slot Selector','free','http://192.168.1.120:3044')">
         <div class="app-thumb-wrap" id="featured-canvas-wrap" style="height:200px;">
@@ -732,9 +788,7 @@
     <!-- Coming Soon: 3 Reel Slot -->
       <div class="app-card coming-soon">
         <div class="app-thumb-wrap" id="thumb-3reel">
-          <img class="app-thumb-img" src="slot-3-reel-thumb.png" alt="3 Reel Slot"/>
-
-          <div class="app-badge coming">COMING SOON</div>
+          <img class="app-thumb-img" src="img/Free.png" alt="3 Reel Slot"/>
         </div>
         <div class="app-body">
           <div class="app-name">3 Reel Slot Selector</div>
@@ -748,9 +802,7 @@
       <!-- Coming Soon: Big Spin Wheel -->
       <div class="app-card coming-soon">
         <div class="app-thumb-wrap" id="thumb-wheel">
-          <img class="app-thumb-img" src="wheel-thumb.png" alt="Big Spin Wheel"/>
-
-          <div class="app-badge coming">COMING SOON</div>
+          <img class="app-thumb-img" src="img/Free.png" alt="Big Spin Wheel"/>
         </div>
         <div class="app-body">
           <div class="app-name">Big Spin Wheel</div>
@@ -764,9 +816,7 @@
       <!-- Coming Soon: Elimination Wheel -->
       <div class="app-card coming-soon">
         <div class="app-thumb-wrap" id="thumb-elim">
-          <img class="app-thumb-img" src="elimination-thumb.png" alt="Elimination Wheel"/>
-
-          <div class="app-badge coming">COMING SOON</div>
+          <img class="app-thumb-img" src="img/Free.png" alt="Elimination Wheel"/>
         </div>
         <div class="app-body">
           <div class="app-name">Elimination Wheel</div>
@@ -780,9 +830,7 @@
       <!-- Coming Soon: Wheel of Slices -->
       <div class="app-card coming-soon">
         <div class="app-thumb-wrap" id="thumb-slices">
-          <img class="app-thumb-img" src="wheel-slices-thumb.png" alt="Wheel of Slices"/>
-
-          <div class="app-badge coming">COMING SOON</div>
+          <img class="app-thumb-img" src="img/Free.png" alt="Wheel of Slices"/>
         </div>
         <div class="app-body">
           <div class="app-name">Wheel of Slices</div>
@@ -798,9 +846,7 @@
     <!-- Coming Soon: Off to the Races -->
       <div class="app-card coming-soon">
         <div class="app-thumb-wrap" id="thumb-races">
-          <img class="app-thumb-img" src="races-thumb.png" alt="Off to the Races"/>
-
-          <div class="app-badge coming">COMING SOON</div>
+          <img class="app-thumb-img" src="img/Free.png" alt="Off to the Races"/>
         </div>
         <div class="app-body">
           <div class="app-name">Off to the Races</div>
@@ -814,9 +860,7 @@
     <!-- Coming Soon: Fishing Derby -->
       <div class="app-card coming-soon">
         <div class="app-thumb-wrap" id="thumb-fishing">
-          <img class="app-thumb-img" src="fishing-thumb.png" alt="Fishing Derby"/>
-
-          <div class="app-badge coming">COMING SOON</div>
+          <img class="app-thumb-img" src="img/Free.png" alt="Fishing Derby"/>
         </div>
         <div class="app-body">
           <div class="app-name">Fishing Derby</div>
@@ -830,9 +874,7 @@
     <!-- Coming Soon: Tower Drop -->
       <div class="app-card coming-soon">
         <div class="app-thumb-wrap" id="thumb-tower">
-          <img class="app-thumb-img" src="tower-thumb.png" alt="Tower Drop"/>
-
-          <div class="app-badge coming">COMING SOON</div>
+          <img class="app-thumb-img" src="img/Free.png" alt="Tower Drop"/>
         </div>
         <div class="app-body">
           <div class="app-name">Tower Drop</div>
@@ -904,9 +946,7 @@
     <!-- Coming Soon: Tourney Bracket Sim -->
     <div class="app-card coming-soon">
       <div class="app-thumb-wrap" id="thumb-tourney">
-        <img class="app-thumb-img" src="tourney-thumb.png" alt="Tourney Bracket Sim"/>
-
-        <div class="app-badge coming">COMING SOON</div>
+        <img class="app-thumb-img" src="img/Free.png" alt="Tourney Bracket Sim"/>
       </div>
       <div class="app-body">
         <div class="app-name">Tourney Bracket Sim</div>
@@ -920,9 +960,7 @@
     <!-- Coming Soon: 3 Reel Slot Sim -->
       <div class="app-card coming-soon">
         <div class="app-thumb-wrap" id="thumb-3reel-sim">
-          <img class="app-thumb-img" src="3reel-sim-thumb.png" alt="3 Reel Slot Sim"/>
-
-          <div class="app-badge coming">COMING SOON</div>
+          <img class="app-thumb-img" src="img/Free.png" alt="3 Reel Slot Sim"/>
         </div>
         <div class="app-body">
           <div class="app-name">3 Reel Slot Sim</div>
@@ -936,9 +974,7 @@
     <!-- Coming Soon: 5 Reel Slot Sim -->
       <div class="app-card coming-soon">
         <div class="app-thumb-wrap" id="thumb-5reel-sim">
-          <img class="app-thumb-img" src="5reel-sim-thumb.png" alt="5 Reel Slot Sim"/>
-
-          <div class="app-badge coming">COMING SOON</div>
+          <img class="app-thumb-img" src="img/Free.png" alt="5 Reel Slot Sim"/>
         </div>
         <div class="app-body">
           <div class="app-name">5 Reel Slot Sim</div>
@@ -952,9 +988,7 @@
     <!-- Coming Soon: 9 Reel Slot Sim -->
       <div class="app-card coming-soon">
         <div class="app-thumb-wrap" id="thumb-9reel-sim">
-          <img class="app-thumb-img" src="9reel-sim-thumb.png" alt="9 Reel Slot Sim"/>
-
-          <div class="app-badge coming">COMING SOON</div>
+          <img class="app-thumb-img" src="img/Free.png" alt="9 Reel Slot Sim"/>
         </div>
         <div class="app-body">
           <div class="app-name">9 Reel Slot Sim</div>
@@ -968,9 +1002,7 @@
     <!-- Coming Soon: Hold'em Poker Sim -->
       <div class="app-card coming-soon">
         <div class="app-thumb-wrap" id="thumb-holdem">
-          <img class="app-thumb-img" src="holdem-thumb.png" alt="Hold'em Poker Sim"/>
-
-          <div class="app-badge coming">COMING SOON</div>
+          <img class="app-thumb-img" src="img/Free.png" alt="Hold'em Poker Sim"/>
         </div>
         <div class="app-body">
           <div class="app-name">Hold'em Poker Sim</div>
@@ -1662,6 +1694,47 @@ window.addEventListener('message', e => {
   if(e.data === 'requestMegaFullscreen') openMegaNudge();
   if(e.data === 'megaFullscreenGranted'){ megaFullscreenActive = true; }
 });
+
+// ─── Theme Toggle ───
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  updateThemeIcon(!isDark);
+}
+
+function updateThemeIcon(isDark) {
+  const lightIcon = document.getElementById('theme-icon-light');
+  const darkIcon = document.getElementById('theme-icon-dark');
+  if (lightIcon && darkIcon) {
+    lightIcon.style.display = isDark ? 'none' : 'inline';
+    darkIcon.style.display = isDark ? 'inline' : 'none';
+  }
+}
+
+// Apply saved theme on load
+(function() {
+  const saved = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  updateThemeIcon(saved === 'dark');
+})();
+
+// ─── Nav hide on scroll down / show on scroll up ───
+(function() {
+  let lastScroll = 0;
+  const threshold = 10;
+  window.addEventListener('scroll', function() {
+    const y = window.scrollY;
+    if (Math.abs(y - lastScroll) < threshold) return;
+    if (y > lastScroll && y > 80) {
+      document.body.classList.add('nav-hidden');
+    } else {
+      document.body.classList.remove('nav-hidden');
+    }
+    lastScroll = y;
+  }, { passive: true });
+})();
 </script>
 
 </body>
