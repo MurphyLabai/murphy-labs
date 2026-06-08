@@ -284,7 +284,7 @@
       background: linear-gradient(135deg, #1a1a2e, #2d2d5a);
     }
     .app-thumb-canvas,
-    .app-thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s; }
+    .app-thumb-img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; transition: transform 0.35s; }
     /* ─── TERMS CONSENT ─── */
     #terms-consent {
       position: fixed; bottom: 0; left: 0; right: 0;
@@ -618,6 +618,7 @@
       .hero-center { width: 100%; padding: 0 16px; order: 3; }
       .hero-right { order: 4; width: 100%; padding: 14px 16px 0; flex-direction: row; flex-wrap: wrap; gap: 10px; }
       .featured-app-box { width: 100%; max-width: 100%; }
+      .featured-app-box .app-thumb-wrap { height: 240px; }
       .sponsor-card { flex: 1; min-width: 140px; }
       .cat-section { padding: 36px 0; }
       .cat-scroll { gap: 12px; } .app-card { width: 288px; } .app-thumb-wrap { height: 192px; }
@@ -635,6 +636,7 @@
         width: 336px;
         flex: 0 0 auto;
       }
+      .featured-app-box .app-thumb-wrap { height: 240px; }
       .hero-right {
         flex-direction: column;
         gap: 10px;
@@ -691,7 +693,7 @@
     <div class="featured-month-badge">★ <span style="font-size:0.85rem;">App of the Month</span> ★<br><span style="color:var(--gold);font-size:0.62rem;">Custom Features Unlocked FREE All Month</span><br><span style="font-size:0.5rem;color:var(--cat-purple);">(Sign up free to unlock this App all Month)</span></div>
     <div class="featured-app-box" id="featured-app-box">
       <div class="app-card app-carousel" data-images="slot-selector-1.png|slot-selector-2.png|slot-selector-3.png|slot-selector-4.png|slot-selector-5.png" style="width:100%;border-radius:0;box-shadow:none;border:1.5px solid rgba(124,111,255,0.3);" onclick="openApp('slot-selector','5 Reel Slot Selector','free','http://192.168.1.120:3044')">
-        <div class="app-thumb-wrap" id="featured-canvas-wrap" style="height:200px;">
+        <div class="app-thumb-wrap" id="featured-canvas-wrap">
           <div class="app-badge free">FREE</div>
         </div>
         <div class="app-body">
