@@ -107,6 +107,7 @@
     body.nav-hidden nav { transform: translateY(-100%); }
     .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; cursor: pointer; }
     .nav-logo-icon { width: 54px; height: 54px; }
+    #nav-promo, #nav-play, #nav-labs { transition: color 0.6s ease; }
     .nav-logo-text { font-family: 'Orbitron', sans-serif; color: var(--text); font-size: 0.88rem; font-weight: 700; letter-spacing: 1px; }
     .nav-logo-text span { color: var(--gold); }
     .nav-links { display: flex; gap: 26px; }
@@ -114,6 +115,10 @@
     .nav-links a:hover { color: var(--gold); }
     .nav-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
     .nav-actions-row { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+    @media (min-width: 901px) {
+      .nav-actions { flex-direction: row; align-items: center; gap: 10px; }
+    }
     .btn-login {
       background: transparent; border: 1.5px solid var(--card-border);
       color: var(--text-secondary); padding: 7px 18px; border-radius: 8px;
@@ -658,10 +663,13 @@
 <!-- ─── NAV ─── -->
 <nav>
   <a href="#" class="nav-logo" onclick="closeViewer(); return false;">
-    <img class="nav-logo-icon" src="/img/nav-logo.png" alt="Logo">
+    <div id="nav-logo-cycler" style="position:relative;width:54px;height:54px;flex-shrink:0;">
+      <img id="logo-img-1" src="/img/header-logo-1.png" alt="Logo" style="position:absolute;inset:0;width:54px;height:54px;opacity:1;transition:opacity 0.6s;">
+      <img id="logo-img-2" src="/img/header-logo-2.png" alt="Logo" style="position:absolute;inset:0;width:54px;height:54px;opacity:0;transition:opacity 0.6s;">
+    </div>
     <span class="nav-logo-text">
-          <span style="display:block;line-height:1.1;"><span style="color:#7c6fff;">PROMO</span><span style="color:var(--gold);">PLAY</span></span>
-          <span style="display:block;color:var(--gold);font-size:0.65rem;letter-spacing:3px;">LABS</span>
+          <span style="display:block;line-height:1.1;"><span id="nav-promo" style="color:#7c6fff;">PROMO</span><span id="nav-play" style="color:var(--gold);">PLAY</span></span>
+          <span id="nav-labs" style="display:block;color:var(--gold);font-size:0.65rem;letter-spacing:3px;">LABS</span>
         </span>
   </a>
   <div class="nav-links">
@@ -670,7 +678,7 @@
     <a href="#giveaway">Giveaway Tools</a>
   </div>
   <div class="nav-actions">
-    <div class="nav-actions-row">
+    <div class="nav-actions-row nav-btns">
       <a href="#" class="btn-login" onclick="openAuth('login')">Sign In</a>
       <a href="#" class="btn-register" onclick="openAuth('register')">Sign Up</a>
       <a href="#" class="btn-pro-badge" onclick="openAuth('register')">PRO $4.99</a>
@@ -1741,6 +1749,30 @@ function updateThemeIcon(isDark) {
     }
     lastScroll = y;
   }, { passive: true });
+})();
+
+// ─── Nav Logo Cycle ───
+(function() {
+  const imgs = document.querySelectorAll('#nav-logo-cycler img');
+  if (!imgs.length) return;
+  const promo = document.getElementById('nav-promo');
+  const play = document.getElementById('nav-play');
+  const labs = document.getElementById('nav-labs');
+  const PURPLE = '#7c6fff';
+  const GOLD = '#c49b30';
+  const states = [
+    { promo: PURPLE, play: GOLD, labs: GOLD },
+    { promo: GOLD, play: PURPLE, labs: PURPLE },
+  ];
+  let idx = 0;
+  setInterval(function() {
+    imgs[idx].style.opacity = '0';
+    idx = (idx + 1) % imgs.length;
+    imgs[idx].style.opacity = '1';
+    promo.style.color = states[idx].promo;
+    play.style.color = states[idx].play;
+    labs.style.color = states[idx].labs;
+  }, 3000);
 })();
 </script>
 
