@@ -112,11 +112,12 @@
     .nav-links { display: flex; gap: 26px; }
     .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.82rem; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--gold); }
-    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+    .nav-actions-row { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
     .btn-login {
       background: transparent; border: 1.5px solid var(--card-border);
       color: var(--text-secondary); padding: 7px 18px; border-radius: 8px;
-      font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none;
+      font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none; white-space: nowrap;
     }
     .btn-login:hover { border-color: var(--gold); color: var(--gold); }
     #theme-toggle { border-radius: 8px; transition: background 0.2s; }
@@ -124,13 +125,13 @@
     .btn-register {
       background: var(--gold); color: #fff; border: none; padding: 7px 18px;
       border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer;
-      transition: all 0.2s; text-decoration: none; box-shadow: 0 2px 8px rgba(196,155,48,0.25);
+      transition: all 0.2s; text-decoration: none; box-shadow: 0 2px 8px rgba(196,155,48,0.25); white-space: nowrap;
     }
     .btn-register:hover { background: #b88a28; transform: translateY(-1px); }
     .btn-pro-badge {
       background: linear-gradient(135deg, var(--cat-purple), #5a4ff5); color: #fff;
       padding: 7px 16px; border-radius: 8px; font-size: 0.75rem; font-weight: 800;
-      letter-spacing: 0.5px; text-decoration: none; box-shadow: 0 2px 10px rgba(124,111,255,0.35);
+      letter-spacing: 0.5px; text-decoration: none; box-shadow: 0 2px 10px rgba(124,111,255,0.35); white-space: nowrap;
     }
     .btn-pro-badge:hover { transform: translateY(-1px); }
 
@@ -669,13 +670,17 @@
     <a href="#giveaway">Giveaway Tools</a>
   </div>
   <div class="nav-actions">
-    <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode" style="background:none;border:none;cursor:pointer;padding:6px 8px;display:flex;align-items:center;font-size:1.2rem;line-height:1;">
-      <span id="theme-icon-light">🌙</span>
-      <span id="theme-icon-dark" style="display:none">☀️</span>
-    </button>
-    <a href="#" class="btn-login" onclick="openAuth('login')">Sign In</a>
-    <a href="#" class="btn-register" onclick="openAuth('register')">Sign Up</a>
-    <a href="#" class="btn-pro-badge" onclick="openAuth('register')">PRO $4.99</a>
+    <div class="nav-actions-row">
+      <a href="#" class="btn-login" onclick="openAuth('login')">Sign In</a>
+      <a href="#" class="btn-register" onclick="openAuth('register')">Sign Up</a>
+      <a href="#" class="btn-pro-badge" onclick="openAuth('register')">PRO $4.99</a>
+    </div>
+    <div class="nav-actions-row">
+      <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode" style="background:none;border:none;cursor:pointer;padding:6px 8px;display:flex;align-items:center;font-size:1.2rem;line-height:1;">
+        <span id="theme-icon-light">🌙</span>
+        <span id="theme-icon-dark" style="display:none">☀️</span>
+      </button>
+    </div>
   </div>
 </nav>
 
