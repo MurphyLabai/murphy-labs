@@ -152,7 +152,7 @@
       background: linear-gradient(160deg, var(--hero-bg-start) 0%, var(--hero-bg-end) 100%);
       width: 100%;
     }
-    .hero-left { max-width: 420px; }
+    .hero-left { max-width: 420px; position: relative; }
     .hero-center {
       display: flex;
       flex-direction: column;
@@ -542,8 +542,13 @@
     @media (max-width: 900px) {
       nav { padding: 12px 20px; } .nav-links { display: none; }
       .nav-actions .btn-pro-badge { display: none; }
-      .hero { grid-template-columns: 1fr; gap: 32px; padding: 40px 0 50px; max-width: 100%; margin: 0; border-radius: 0; }
+      .hero { grid-template-columns: 1fr; gap: 32px; padding: 40px 0 50px; max-width: 100%; margin: 0; border-radius: 0; position: relative; }
       .hero-left, .hero-right { padding: 0 16px; }
+      #theme-toggle { display: none; }
+      #theme-toggle-mobile { display: flex; }
+      .hero-center { width: 100%; padding: 0 16px; order: 3; }
+      .hero-right { order: 4; width: 100%; padding: 14px 16px 0; flex-direction: row; flex-wrap: wrap; gap: 10px; }
+    }
 
     .featured-label {
       font-family: 'Audiowide', sans-serif;
@@ -609,7 +614,8 @@
       .viewer-app-name { display: none; }
       .viewer-mega, .viewer-pro-badge { padding: 6px 10px; font-size: 0.7rem; }
       .viewer-close { padding: 6px 10px; font-size: 0.72rem; }
-      .hero { padding: 36px 0 50px; }
+      .hero { padding: 36px 0 50px; position: relative; }
+      .hero-left { position: relative; }
       .hero-left, .hero-right { padding: 0 14px; }
       .cat-section { padding: 32px 0; }
       .hero-actions { flex-direction: column; gap: 10px; }
@@ -684,7 +690,7 @@
       <a href="#" class="btn-pro-badge" onclick="openAuth('register')">PRO $4.99</a>
     </div>
     <div class="nav-actions-row">
-      <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode" style="background:none;border:none;cursor:pointer;padding:6px 8px;display:flex;align-items:center;font-size:1.2rem;line-height:1;">
+      <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode" style="background:none;border:none;cursor:pointer;padding:6px 8px;align-items:center;font-size:1.2rem;line-height:1;">
         <span id="theme-icon-light">🌙</span>
         <span id="theme-icon-dark" style="display:none">☀️</span>
       </button>
@@ -695,6 +701,10 @@
 <!-- ─── HERO ─── -->
 <section class="hero">
   <div class="hero-left animate-in">
+    <button id="theme-toggle-mobile" onclick="toggleTheme()" title="Toggle dark/light mode" style="background:none;border:none;cursor:pointer;padding:6px 8px;align-items:center;font-size:1.2rem;line-height:1;position:absolute;top:8px;left:16px;z-index:10;">
+      <span id="theme-icon-light-mobile">🌙</span>
+      <span id="theme-icon-dark-mobile" style="display:none">☀️</span>
+    </button>
     <h1>Randomness,<br><span>Supercharged.</span></h1>
     <p>Slot selectors, dice rollers, coin flips, card draws - all free to use. Upload your own music, images, and themes with a Pro subscription.</p>
     <div class="diamond-cta-sub"><strong>All Diamond Apps Free to Use - Instantly, No Sign Up Required</strong></div>
@@ -1722,9 +1732,15 @@ function toggleTheme() {
 function updateThemeIcon(isDark) {
   const lightIcon = document.getElementById('theme-icon-light');
   const darkIcon = document.getElementById('theme-icon-dark');
+  const lightIconM = document.getElementById('theme-icon-light-mobile');
+  const darkIconM = document.getElementById('theme-icon-dark-mobile');
   if (lightIcon && darkIcon) {
     lightIcon.style.display = isDark ? 'none' : 'inline';
     darkIcon.style.display = isDark ? 'inline' : 'none';
+  }
+  if (lightIconM && darkIconM) {
+    lightIconM.style.display = isDark ? 'none' : 'inline';
+    darkIconM.style.display = isDark ? 'inline' : 'none';
   }
 }
 
