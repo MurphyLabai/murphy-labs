@@ -336,11 +336,17 @@
 
     .app-body { padding: 14px 16px 16px; }
     .app-name { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 6px; line-height: 1.3; }
-    .app-features { display: flex; flex-direction: column; gap: 3px; }
+    .app-features { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+    .app-features-col-header { font-size: 0.6rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+    .app-features-col-header.free { color: var(--gold); }
+    .app-features-col-header.diamond { color: var(--cat-purple); }
     .app-feature { font-size: 0.68rem; color: var(--text-secondary); display: flex; align-items: center; gap: 5px; }
     .app-feature .check { color: var(--gold); font-weight: 700; }
+    .app-feature .diamond-icon { color: var(--cat-purple); font-size: 0.65rem; }
     .app-feature.locked { color: var(--muted); }
     .app-feature .lock { font-size: 0.6rem; }
+    .app-features.coming-soon { display: block; text-align: center; }
+    .app-features.coming-soon .app-feature { justify-content: center; color: var(--muted); font-size: 0.7rem; font-style: italic; }
     .app-footer {
       display: flex; align-items: center; justify-content: space-between;
       padding: 10px 16px 14px; border-top: 1px solid var(--card-border);
@@ -722,11 +728,14 @@
         <div class="app-body">
           <div class="app-name">5 Reel Slot Selector</div>
           <div class="app-features">
-            <div class="app-feature"><span class="check">✓</span> All standard reels</div>
-            <div class="app-feature"><span class="check">✓</span> Winner history</div>
-            <div class="app-feature"><span class="check">✓</span> Sound effects</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> Custom images</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> Custom music</div>
+            <div class="app-features-col">
+              <div class="app-features-col-header free">FREE</div>
+              <!-- FREE features here -->
+            </div>
+            <div class="app-features-col">
+              <div class="app-features-col-header diamond">DIAMOND</div>
+              <!-- DIAMOND features here -->
+            </div>
           </div>
         </div>
         <div class="app-footer">
@@ -777,11 +786,14 @@
       <div class="app-body">
         <div class="app-name">5 Reel Slot Selector</div>
         <div class="app-features">
-          <div class="app-feature"><span class="check">✓</span> All standard reels</div>
-          <div class="app-feature"><span class="check">✓</span> Winner history</div>
-          <div class="app-feature"><span class="check">✓</span> Sound effects</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Custom images</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Custom music</div>
+          <div class="app-features-col">
+            <div class="app-features-col-header free">FREE</div>
+            <!-- FREE features here -->
+          </div>
+          <div class="app-features-col">
+            <div class="app-features-col-header diamond">DIAMOND</div>
+            <!-- DIAMOND features here -->
+          </div>
         </div>
       </div>
       <div class="app-footer">
@@ -798,11 +810,14 @@
       <div class="app-body">
         <div class="app-name">Coin Toss</div>
         <div class="app-features">
-          <div class="app-feature"><span class="check">✓</span> Heads or tails</div>
-          <div class="app-feature"><span class="check">✓</span> Flip history</div>
-          <div class="app-feature"><span class="check">✓</span> 6 coin styles</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Custom faces</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Custom music</div>
+          <div class="app-features-col">
+            <div class="app-features-col-header free">FREE</div>
+            <!-- FREE features here -->
+          </div>
+          <div class="app-features-col">
+            <div class="app-features-col-header diamond">DIAMOND</div>
+            <!-- DIAMOND features here -->
+          </div>
         </div>
       </div>
       <div class="app-footer">
@@ -817,9 +832,8 @@
         </div>
         <div class="app-body">
           <div class="app-name">3 Reel Slot Selector</div>
-          <div class="app-features">
-            <div class="app-feature locked"><span class="lock">🔒</span> Classic slot feel</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> Fast spins</div>
+          <div class="app-features coming-soon">
+            <div class="app-feature">More details coming soon</div>
           </div>
         </div>
         <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
@@ -832,8 +846,9 @@
         <div class="app-body">
           <div class="app-name">Big Spin Wheel</div>
           <div class="app-features">
-            <div class="app-feature locked"><span class="lock">🔒</span> Custom segments</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> Sound effects</div>
+            <div class="app-features coming-soon">
+              <div class="app-feature">More details coming soon</div>
+            </div>
           </div>
         </div>
         <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
@@ -845,9 +860,8 @@
         </div>
         <div class="app-body">
           <div class="app-name">Elimination Wheel</div>
-          <div class="app-features">
-            <div class="app-feature locked"><span class="lock">🔒</span> Knockout rounds</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> Team mode</div>
+          <div class="app-features coming-soon">
+            <div class="app-feature">More details coming soon</div>
           </div>
         </div>
         <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
@@ -859,9 +873,8 @@
         </div>
         <div class="app-body">
           <div class="app-name">Wheel of Slices</div>
-          <div class="app-features">
-            <div class="app-feature locked"><span class="lock">🔒</span> Custom slices</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> Weighted odds</div>
+          <div class="app-features coming-soon">
+            <div class="app-feature">More details coming soon</div>
           </div>
         </div>
         <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
@@ -875,9 +888,8 @@
         </div>
         <div class="app-body">
           <div class="app-name">Off to the Races</div>
-          <div class="app-features">
-            <div class="app-feature locked"><span class="lock">🔒</span> Custom tracks</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> Race day mode</div>
+          <div class="app-features coming-soon">
+            <div class="app-feature">More details coming soon</div>
           </div>
         </div>
         <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
@@ -889,9 +901,8 @@
         </div>
         <div class="app-body">
           <div class="app-name">Fishing Derby</div>
-          <div class="app-features">
-            <div class="app-feature locked"><span class="lock">🔒</span> Catch fish</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> Leaderboards</div>
+          <div class="app-features coming-soon">
+            <div class="app-feature">More details coming soon</div>
           </div>
         </div>
         <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
@@ -903,9 +914,8 @@
         </div>
         <div class="app-body">
           <div class="app-name">Tower Drop</div>
-          <div class="app-features">
-            <div class="app-feature locked"><span class="lock">🔒</span> Plinko drops</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> Custom prizes</div>
+          <div class="app-features coming-soon">
+            <div class="app-feature">More details coming soon</div>
           </div>
         </div>
         <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
@@ -935,11 +945,14 @@
       <div class="app-body">
         <div class="app-name">Dice Roller</div>
         <div class="app-features">
-          <div class="app-feature"><span class="check">✓</span> d4 to d100</div>
-          <div class="app-feature"><span class="check">✓</span> Roll history</div>
-          <div class="app-feature"><span class="check">✓</span> Multiple dice</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Video backgrounds</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Custom sounds</div>
+          <div class="app-features-col">
+            <div class="app-features-col-header free">FREE</div>
+            <!-- FREE features here -->
+          </div>
+          <div class="app-features-col">
+            <div class="app-features-col-header diamond">DIAMOND</div>
+            <!-- DIAMOND features here -->
+          </div>
         </div>
       </div>
       <div class="app-footer">
@@ -956,11 +969,14 @@
       <div class="app-body">
         <div class="app-name">Card Flip</div>
         <div class="app-features">
-          <div class="app-feature"><span class="check">✓</span> Full deck</div>
-          <div class="app-feature"><span class="check">✓</span> Shuffle animation</div>
-          <div class="app-feature"><span class="check">✓</span> Draw history</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Custom card backs</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Custom sounds</div>
+          <div class="app-features-col">
+            <div class="app-features-col-header free">FREE</div>
+            <!-- FREE features here -->
+          </div>
+          <div class="app-features-col">
+            <div class="app-features-col-header diamond">DIAMOND</div>
+            <!-- DIAMOND features here -->
+          </div>
         </div>
       </div>
       <div class="app-footer">
@@ -975,9 +991,8 @@
       </div>
       <div class="app-body">
         <div class="app-name">Tourney Bracket Sim</div>
-        <div class="app-features">
-          <div class="app-feature locked"><span class="lock">🔒</span> Bracket builder</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Auto advancement</div>
+        <div class="app-features coming-soon">
+          <div class="app-feature">More details coming soon</div>
         </div>
       </div>
       <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
@@ -989,9 +1004,8 @@
         </div>
         <div class="app-body">
           <div class="app-name">3 Reel Slot Sim</div>
-          <div class="app-features">
-            <div class="app-feature locked"><span class="lock">🔒</span> Classic gameplay</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> Realistic odds</div>
+          <div class="app-features coming-soon">
+            <div class="app-feature">More details coming soon</div>
           </div>
         </div>
         <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
@@ -1003,9 +1017,8 @@
         </div>
         <div class="app-body">
           <div class="app-name">5 Reel Slot Sim</div>
-          <div class="app-features">
-            <div class="app-feature locked"><span class="lock">🔒</span> All paylines</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> Bonus rounds</div>
+          <div class="app-features coming-soon">
+            <div class="app-feature">More details coming soon</div>
           </div>
         </div>
         <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
@@ -1017,9 +1030,8 @@
         </div>
         <div class="app-body">
           <div class="app-name">9 Reel Slot Sim</div>
-          <div class="app-features">
-            <div class="app-feature locked"><span class="lock">🔒</span> Extreme reels</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> High stakes</div>
+          <div class="app-features coming-soon">
+            <div class="app-feature">More details coming soon</div>
           </div>
         </div>
         <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
@@ -1031,9 +1043,8 @@
         </div>
         <div class="app-body">
           <div class="app-name">Hold'em Poker Sim</div>
-          <div class="app-features">
-            <div class="app-feature locked"><span class="lock">🔒</span> Realistic AI</div>
-            <div class="app-feature locked"><span class="lock">🔒</span> Tournament mode</div>
+          <div class="app-features coming-soon">
+            <div class="app-feature">More details coming soon</div>
           </div>
         </div>
         <div class="app-footer"><span class="app-use-free">Coming soon</span></div>
@@ -1065,11 +1076,14 @@
       <div class="app-body">
         <div class="app-name">NameXtractor</div>
         <div class="app-features">
-          <div class="app-feature"><span class="check">✓</span> Paste any text</div>
-          <div class="app-feature"><span class="check">✓</span> Extract usernames</div>
-          <div class="app-feature"><span class="check">✓</span> Copy results</div>
-          <div class="app-feature"><span class="check">✓</span> Facebook extractor</div>
-          <div class="app-feature"><span class="check">✓</span> Reddit extractor</div>
+          <div class="app-features-col">
+            <div class="app-features-col-header free">FREE</div>
+            <!-- FREE features here -->
+          </div>
+          <div class="app-features-col">
+            <div class="app-features-col-header diamond">DIAMOND</div>
+            <!-- DIAMOND features here -->
+          </div>
         </div>
       </div>
       <div class="app-footer">
@@ -1085,11 +1099,14 @@
       <div class="app-body">
         <div class="app-name">Promo Pilot Lite</div>
         <div class="app-features">
-          <div class="app-feature"><span class="check">✓</span> Random picker</div>
-          <div class="app-feature"><span class="check">✓</span> IP-based limits</div>
-          <div class="app-feature"><span class="check">✓</span> Simple export</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Advanced analytics</div>
-          <div class="app-feature locked"><span class="lock">🔒</span> Bulk import</div>
+          <div class="app-features-col">
+            <div class="app-features-col-header free">FREE</div>
+            <!-- FREE features here -->
+          </div>
+          <div class="app-features-col">
+            <div class="app-features-col-header diamond">DIAMOND</div>
+            <!-- DIAMOND features here -->
+          </div>
         </div>
       </div>
       <div class="app-footer">
@@ -1105,11 +1122,14 @@
       <div class="app-body">
         <div class="app-name">Promo Pilot Pro</div>
         <div class="app-features">
-          <div class="app-feature"><span class="check">✓</span> Everything in Lite</div>
-          <div class="app-feature"><span class="check">✓</span> Advanced analytics</div>
-          <div class="app-feature"><span class="check">✓</span> Bulk import</div>
-          <div class="app-feature"><span class="check">✓</span> AWS Stripe login</div>
-          <div class="app-feature"><span class="check">✓</span> Priority support</div>
+          <div class="app-features-col">
+            <div class="app-features-col-header free">FREE</div>
+            <!-- FREE features here -->
+          </div>
+          <div class="app-features-col">
+            <div class="app-features-col-header diamond">DIAMOND</div>
+            <!-- DIAMOND features here -->
+          </div>
         </div>
       </div>
       <div class="app-footer">
