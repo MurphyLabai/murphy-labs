@@ -336,11 +336,14 @@
 
     .app-body { padding: 14px 16px 16px; }
     .app-name { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 6px; line-height: 1.3; }
-    .app-features { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+    .app-features { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; max-height: 150px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--card-border) transparent; }
+    .app-features::-webkit-scrollbar { width: 4px; }
+    .app-features::-webkit-scrollbar-track { background: transparent; }
+    .app-features::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 2px; }
     .app-features-col-header { font-size: 0.6rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
     .app-features-col-header.free { color: var(--gold); }
     .app-features-col-header.diamond { color: var(--cat-purple); }
-    .app-feature { font-size: 0.68rem; color: var(--text-secondary); display: flex; align-items: center; gap: 5px; }
+    .app-feature { font-size: 0.68rem; color: var(--text); display: flex; align-items: center; gap: 5px; }
     .app-feature .check { color: var(--gold); font-weight: 700; }
     .app-feature .diamond-icon { color: var(--cat-purple); font-size: 0.65rem; }
     .app-feature.locked { color: var(--muted); }
@@ -587,6 +590,12 @@
       flex-direction: column;
       gap: 6px;
     }
+    .featured-app-box .app-features {
+      max-height: 150px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--card-border) transparent;
+    }
     .btn-featured {
       display: inline-block;
       background: #7c6fff;
@@ -735,7 +744,20 @@
           <div class="app-features">
             <div class="app-features-col">
               <div class="app-features-col-header free">FREE</div>
-              <!-- FREE features here -->
+              <div class="app-feature"><span class="check">✓</span> Mega Full Screen Mode</div>
+              <div class="app-feature"><span class="check">✓</span> Enter up to 1000 Entries</div>
+              <div class="app-feature"><span class="check">✓</span> Custom Slot Legend</div>
+              <div class="app-feature"><span class="check">✓</span> Copy & Share spin history</div>
+              <div class="app-feature" style="font-size:0.6rem;font-weight:700;color:var(--gold);margin-top:4px;">Selections Available:</div>
+              <div class="app-feature"><span class="check">✓</span> 14 spin/winner sounds</div>
+              <div class="app-feature"><span class="check">✓</span> 36 Background music tracks</div>
+              <div class="app-feature"><span class="check">✓</span> 11 Backdrop Pictures</div>
+              <div class="app-feature"><span class="check">✓</span> 5 Different Reel sets</div>
+              <div class="app-feature"><span class="check">✓</span> 9 Spin buttons</div>
+              <div class="app-feature"><span class="check">✓</span> 8 Winner pop-up banners</div>
+              <div class="app-feature"><span class="check">✓</span> 5 Jackpot videos</div>
+              <div class="app-feature"><span class="check">✓</span> 8 Center reel colors</div>
+              <div class="app-feature"><span class="check">✓</span> 8 Slot trim colors</div>
             </div>
             <div class="app-features-col">
               <div class="app-features-col-header diamond">DIAMOND</div>
@@ -793,7 +815,20 @@
         <div class="app-features">
           <div class="app-features-col">
             <div class="app-features-col-header free">FREE</div>
-            <!-- FREE features here -->
+            <div class="app-feature"><span class="check">✓</span> Mega Full Screen Mode</div>
+            <div class="app-feature"><span class="check">✓</span> Enter up to 1000 Entries</div>
+            <div class="app-feature"><span class="check">✓</span> Custom Slot Legend</div>
+            <div class="app-feature"><span class="check">✓</span> Copy &amp; Share spin history</div>
+            <div class="app-feature" style="font-size:0.6rem;font-weight:700;color:var(--gold);margin-top:4px;">Selections Available:</div>
+            <div class="app-feature"><span class="check">✓</span> 14 spin/winner sounds</div>
+            <div class="app-feature"><span class="check">✓</span> 36 Background music tracks</div>
+            <div class="app-feature"><span class="check">✓</span> 11 Backdrop Pictures</div>
+            <div class="app-feature"><span class="check">✓</span> 5 Different Reel sets</div>
+            <div class="app-feature"><span class="check">✓</span> 9 Spin buttons</div>
+            <div class="app-feature"><span class="check">✓</span> 8 Winner pop-up banners</div>
+            <div class="app-feature"><span class="check">✓</span> 5 Jackpot videos</div>
+            <div class="app-feature"><span class="check">✓</span> 8 Center reel colors</div>
+            <div class="app-feature"><span class="check">✓</span> 8 Slot trim colors</div>
           </div>
           <div class="app-features-col">
             <div class="app-features-col-header diamond">DIAMOND</div>
@@ -1119,7 +1154,7 @@
       </div>
     </div>
     <!-- Promo Pilot Pro -->
-    <div class="app-card app-carousel" data-app-id="promo-pilot-pro" data-images="promo-pilot-pro-1.png|promo-pilot-pro-2.png|promo-pilot-pro-3.png" onclick="window.open('https://promoplay.ca/promo-pilot-pro','_blank')">
+    <div class="app-card app-carousel" data-app-id="promo-pilot-pro" data-images="promo-pilot-pro-1.png|promo-pilot-pro-2.png|promo-pilot-pro-3.png" onclick="window.open('https://promoplay.ca/pilotpro','_blank')">
       <div class="app-thumb-wrap" id="thumb-pppro">
 
         <div class="app-badge pro">PRO</div>
