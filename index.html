@@ -337,6 +337,7 @@
     .app-body { padding: 14px 16px 16px; }
     .app-name { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 6px; line-height: 1.3; text-align: center; }
     .app-features { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; max-height: 150px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--card-border) transparent; }
+    .app-features.tall { max-height: 280px; }
     .app-features::-webkit-scrollbar { width: 4px; }
     .app-features::-webkit-scrollbar-track { background: transparent; }
     .app-features::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 2px; }
@@ -1190,8 +1191,19 @@
       </div>
       <div class="app-body">
         <div class="app-name">Promo Pilot Lite</div>
-        <div class="app-features coming-soon">
-          <div class="app-feature">More details coming soon</div>
+        <div class="app-features tall">
+          <div class="app-features-col">
+            <div class="app-feature"><span class="check">✓</span> 20 draws per Month Free</div>
+            <div class="app-feature"><span class="check">✓</span> No Ads</div>
+            <div class="app-feature"><span class="check">✓</span> Use 2 virtual dice or roll your own</div>
+            <div class="app-feature"><span class="check">✓</span> Light or Dark screen mode</div>
+          </div>
+          <div class="app-features-col">
+            <div class="app-feature"><span class="check">✓</span> Auto or Manual Randomization</div>
+            <div class="app-feature"><span class="check">✓</span> Designate # of winners</div>
+            <div class="app-feature" style="font-size:0.6rem;font-weight:700;color:var(--cat-purple);margin-top:6px;">Upgrade to Pro & 1st Month FREE!</div>
+            <div class="app-feature" style="font-size:0.58rem;color:var(--muted);">Use code "WELCOME" in Stripe checkout</div>
+          </div>
         </div>
       </div>
       <div class="app-footer">
@@ -1206,8 +1218,26 @@
       </div>
       <div class="app-body">
         <div class="app-name">Promo Pilot Pro</div>
-        <div class="app-features coming-soon">
-          <div class="app-feature">More details coming soon</div>
+        <div class="app-features tall">
+          <div class="app-features-col">
+            <div class="app-feature"><span class="check">✓</span> Unlimited Monthly Usage</div>
+            <div class="app-feature"><span class="check">✓</span> Upload Custom Logo</div>
+            <div class="app-feature"><span class="check">✓</span> 63 Audio tracks</div>
+            <div class="app-feature"><span class="check">✓</span> Upload your own audio</div>
+            <div class="app-feature"><span class="check">✓</span> Multiple accent colors</div>
+            <div class="app-feature"><span class="check">✓</span> Use up to 8 virtual dice</div>
+            <div class="app-feature"><span class="check">✓</span> Pick your dice color</div>
+            <div class="app-feature"><span class="check">✓</span> Light or Dark screen mode</div>
+          </div>
+          <div class="app-features-col">
+            <div class="app-feature"><span class="check">✓</span> Auto or Manual Randomization</div>
+            <div class="app-feature"><span class="check">✓</span> Designate # of winners</div>
+            <div class="app-feature"><span class="check">✓</span> Enhanced results list</div>
+            <div class="app-feature"><span class="check">✓</span> Pick your winner emoji</div>
+            <div class="app-feature"><span class="check">✓</span> Shareable results link</div>
+            <div class="app-feature"><span class="check">✓</span> 45 Days of results history</div>
+            <div class="app-feature"><span class="check">✓</span> Tamper proof result code</div>
+          </div>
         </div>
       </div>
       <div class="app-footer">
