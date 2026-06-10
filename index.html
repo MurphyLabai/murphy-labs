@@ -252,16 +252,19 @@
       .sponsor-card { min-height: 300px; padding: 20px; }
       .sponsor-logo { width: 120px; height: 120px; }
     }
+    @media (min-width: 601px) {
+      .sponsor-logo-mobile { display: none; }
+    }
     .sponsor-card:hover { border-color: rgba(255,255,255,0.8); transform: translateY(-1px); box-shadow: 0 0 30px rgba(255,255,255,0.4), 0 0 60px rgba(200,220,255,0.2), 0 4px 14px rgba(0,0,0,0.1); }
     .sponsor-logo {
       width: 46px; height: 46px; border-radius: 10px; background: transparent;
       border: none; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
     }
-    .sponsor-info { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+    .sponsor-info { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; }
     .sponsor-name { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
     .sponsor-desc { font-size: 1rem; color: var(--text); line-height: 1.4; }
-    .sponsor-cta { font-size: 1.05rem; color: #62CE2F; font-weight: 700; margin-top: 8px; }
+    .sponsor-cta { font-size: 2rem; color: #62CE2F; font-weight: 700; margin-top: 8px; }
     .sponsor-cta { font-size: 0.6rem; color: var(--gold); font-weight: 700; }
 
     /* ─── CATEGORY SECTIONS ─── */
@@ -668,7 +671,10 @@
     }
     @media (max-width: 600px) {
       .hero-right { display: flex; flex-direction: row; flex-wrap: wrap; gap: 8px; }
-      .sponsor-card { flex: 1; min-width: 140px; min-height: 200px; padding: 20px; }
+      .sponsor-card { flex: 1; min-width: 140px; min-height: 200px; padding: 20px; align-items: flex-start; }
+      .sponsor-logo { display: none; }
+      .sponsor-logo-mobile { display: block; width: 40px; height: 40px; margin-right: 8px; flex-shrink: 0; }
+      .sponsor-title-row { display: flex; align-items: center; justify-content: center; }
       .hero-stats { grid-template-columns: repeat(3, 1fr); }
       .app-card { width: 240px; } .app-thumb-wrap { height: 160px; }
       .footer-top { grid-template-columns: 1fr; }
@@ -698,6 +704,9 @@
       .featured-app-box { width: 100%; max-width: 100%; }
       .featured-app-box .app-thumb-wrap { height: 240px; }
       .sponsor-card { flex: 1; min-width: 140px; min-height: 200px; padding: 20px; }
+      .sponsor-logo { display: none; }
+      .sponsor-logo-mobile { display: block; width: 40px; height: 40px; margin-right: 8px; flex-shrink: 0; }
+      .sponsor-title-row { display: flex; align-items: center; justify-content: center; }
       .cat-section { padding: 36px 0; }
       .cat-scroll { gap: 12px; } .app-card { width: 288px; } .app-thumb-wrap { height: 192px; }
       .footer-top { grid-template-columns: 1fr 1fr; }
@@ -823,7 +832,10 @@
     <a href="https://halopool.io" target="_blank" class="sponsor-card">
       <div class="sponsor-logo"><img src="img/halo-pool-logo.png" alt="Halo Pool" style="width:100%;height:100%;object-fit:contain;"></div>
       <div class="sponsor-info">
-        <div class="sponsor-name">HALO <span style="color:#62CE2F;">POOL</span></div>
+        <div class="sponsor-title-row">
+          <div class="sponsor-logo-mobile"><img src="img/halo-pool-logo.png" alt="Halo Pool" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="sponsor-name">HALO <span style="color:#62CE2F;">POOL</span></div>
+        </div>
         <div class="sponsor-desc" style="font-size:1rem; font-weight:600;">Community Giveaways Done Right</div>
         <div class="sponsor-desc" style="margin-top:4px;color:#62CE2F;font-size:0.9rem;">Halo Pool lets Telegram communities launch transparent, automated, on-chain giveaways in minutes. No manual payouts. No opaque draws. Just fair, verifiable campaigns built for Web3 communities.</div>
         <div class="sponsor-cta">halopool.io →</div>
