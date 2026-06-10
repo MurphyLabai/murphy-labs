@@ -169,7 +169,9 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      flex: 1;
     }
+    @media (min-width: 901px) { .hero-right { flex: none; width: 370px; } }
     .featured-app-box {
       width: 100%;
       border-radius: 20px;
@@ -240,29 +242,14 @@
     .hero-stat .big { font-family: 'Audiowide', sans-serif; font-size: 1.4rem; color: var(--gold); display: block; line-height: 1; margin-bottom: 6px; }
     .hero-stat .label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
     .hero-stat.highlight { background: rgba(196,155,48,0.06); border-color: rgba(196,155,48,0.25); }
-    .sponsor-carousel { width: 100%; }
-    .sponsor-item {
-      display: flex; align-items: stretch;
-      background: var(--surface); border: 1.5px solid rgba(255,255,255,0.5); border-radius: 14px;
-      padding: 0; text-decoration: none; color: inherit;
-      transition: box-shadow 0.2s, border-color 0.2s; cursor: pointer;
-      box-shadow: 0 0 20px rgba(255,255,255,0.2), 0 0 40px rgba(200,220,255,0.08), 0 2px 8px rgba(0,0,0,0.06);
-      overflow: hidden;
-    }
-    .sponsor-item:hover { border-color: rgba(255,255,255,0.8); box-shadow: 0 0 30px rgba(255,255,255,0.35), 0 0 60px rgba(200,220,255,0.15), 0 4px 14px rgba(0,0,0,0.1); }
-    .sponsor-logo {
-      width: 140px; flex-shrink: 0; background: transparent;
-      display: flex; align-items: center; justify-content: center; padding: 14px 12px;
-    }
-    .sponsor-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
-    .sponsor-info { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; padding: 14px 16px; gap: 6px; }
-    .sponsor-header { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); text-align: center; }
-    .sponsor-desc { font-size: 0.62rem; color: var(--text); line-height: 1.4; }
-    .sponsor-footer { font-size: 0.65rem; color: var(--gold); font-weight: 600; margin-top: 2px; }
+    .sponsor-box { width: 100%; min-height: 240px; background: var(--surface); border: 1.5px solid rgba(255,255,255,0.5); border-radius: 14px; display: flex; align-items: stretch; overflow: hidden; }
+    @media (min-width: 901px) { .sponsor-box { width: 350px; } }
+    .sponsor-col-a { width: 40%; display: flex; align-items: center; justify-content: center; border-right: 1.5px solid rgba(255,255,255,0.3); }
+    .sponsor-col-b { width: 60%; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 900px) {
-      .sponsor-item { flex-direction: row; }
-      .sponsor-logo { width: 120px; padding: 10px 8px; }
-      .sponsor-info { padding: 10px 12px; }
+      .sponsor-item { flex-direction: row; min-height: 280px; }
+      .sponsor-logo { width: 40%; padding: 10px 12px; }
+      .sponsor-info { width: 60%; padding: 14px 16px; }
     }
 
     /* ─── CATEGORY SECTIONS ─── */
@@ -821,17 +808,13 @@
     </div>
   </div>
   <div class="hero-right animate-in" style="animation-delay:0.2s;">
-    <div class="sponsor-carousel">
-      <a href="https://halopool.io" target="_blank" class="sponsor-item active">
-        <div class="sponsor-logo">
-          <img src="img/halo-pool-logo.png" alt="Halo Pool">
-        </div>
-        <div class="sponsor-info">
-          <div class="sponsor-header">Halo Pool</div>
-          <div class="sponsor-desc">Halo Pool lets Telegram communities launch transparent, automated, on-chain giveaways in minutes. No manual payouts. No opaque draws. Just fair, verifiable campaigns built for Web3 communities.</div>
-          <div class="sponsor-footer">halopool.io →</div>
-        </div>
-      </a>
+    <div class="sponsor-box">
+      <div class="sponsor-col-a">
+        <span>Column A</span>
+      </div>
+      <div class="sponsor-col-b">
+        <span>Column B</span>
+      </div>
     </div>
   </div>
 </section>
