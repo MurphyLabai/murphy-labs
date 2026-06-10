@@ -170,8 +170,6 @@
       flex-direction: column;
       gap: 10px;
     }
-    #featured-app-box-hero { transform: scale(0.7); transform-origin: top center; margin-top: 100px; }
-    @media (min-width: 901px) { #featured-app-box-hero { margin-top: 200px; } }
     .featured-app-box {
       width: 100%;
       border-radius: 20px;
@@ -242,12 +240,25 @@
     .hero-stat .big { font-family: 'Audiowide', sans-serif; font-size: 1.4rem; color: var(--gold); display: block; line-height: 1; margin-bottom: 6px; }
     .hero-stat .label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
     .hero-stat.highlight { background: rgba(196,155,48,0.06); border-color: rgba(196,155,48,0.25); }
-
-    @media (max-width: 900px) {
-      .sponsor-item { flex-direction: row; min-height: 280px; }
-      .sponsor-logo { width: 40%; padding: 10px 12px; }
-      .sponsor-info { width: 60%; padding: 14px 16px; }
+    .sponsors-column { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+    .sponsor-card {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.9); border: 1.5px solid rgba(196,155,48,0.35); border-radius: 14px;
+      padding: 12px 14px; text-decoration: none; color: inherit;
+      transition: all 0.2s; cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
+    .sponsor-card:hover { border-color: var(--gold); background: #fff; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+    .sponsor-logo {
+      width: 46px; height: 46px; border-radius: 10px; background: rgba(196,155,48,0.1);
+      border: 2px solid var(--gold-border); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.55rem; color: rgba(196,155,48,0.7); font-weight: 700; text-align: center; line-height: 1.2;
+    }
+    .sponsor-info { flex: 1; min-width: 0; }
+    .sponsor-name { font-size: 0.75rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .sponsor-desc { font-size: 0.62rem; color: var(--muted); line-height: 1.3; margin-bottom: 3px; }
+    .sponsor-cta { font-size: 0.6rem; color: var(--gold); font-weight: 700; }
 
     /* ─── CATEGORY SECTIONS ─── */
     .cat-section { padding: 56px 48px; max-width: 1300px; margin: 0 auto; }
@@ -805,52 +816,22 @@
     </div>
   </div>
   <div class="hero-right animate-in" style="animation-delay:0.2s;">
-    <div class="featured-app-box" id="featured-app-box-hero">
-      <div class="app-card app-carousel" data-images="slot-selector-1.png|slot-selector-2.png|slot-selector-3.png|slot-selector-4.png|slot-selector-5.png" style="width:100%;border-radius:0;box-shadow:none;border:1.5px solid rgba(124,111,255,0.3);" onclick="openApp('slot-selector','5 Reel Slot Selector','free','http://192.168.1.120:3044')">
-        <div class="app-thumb-wrap" id="featured-canvas-wrap-hero">
-          <div class="app-badge free">FREE</div>
-        </div>
-        <div class="app-body">
-          <div class="app-name"><span class="app-name-text">5 Reel Slot Selector</span> <span class="info-btn" onclick="event.stopPropagation();openInfoModal('slot-selector')" title="How to use">ℹ</span></div>
-          <div class="app-features">
-            <div class="app-features-col">
-              <div class="app-features-col-header free">FREE</div>
-              <div class="app-feature"><span class="check">✓</span> Mega Full Screen Mode</div>
-              <div class="app-feature"><span class="check">✓</span> Enter up to 1000 Entries</div>
-              <div class="app-feature"><span class="check">✓</span> Custom Slot Legend</div>
-              <div class="app-feature"><span class="check">✓</span> Copy & Share spin history</div>
-              <div class="app-feature" style="font-size:0.6rem;font-weight:700;color:var(--gold);margin-top:4px;">Selections Available:</div>
-              <div class="app-feature"><span class="check">✓</span> 14 spin/winner sounds</div>
-              <div class="app-feature"><span class="check">✓</span> 36 Background music tracks</div>
-              <div class="app-feature"><span class="check">✓</span> 11 Backdrop Pictures</div>
-              <div class="app-feature"><span class="check">✓</span> 5 Different Reel sets</div>
-              <div class="app-feature"><span class="check">✓</span> 9 Spin buttons</div>
-              <div class="app-feature"><span class="check">✓</span> 8 Winner pop-up banners</div>
-              <div class="app-feature"><span class="check">✓</span> 5 Jackpot videos</div>
-              <div class="app-feature"><span class="check">✓</span> 8 Center reel colors</div>
-              <div class="app-feature"><span class="check">✓</span> 8 Slot trim colors</div>
-            </div>
-            <div class="app-features-col">
-              <div class="app-features-col-header" style="color:#00D1FF;">DIAMOND</div>
-              <div class="app-feature"><span class="check">✓</span> All FREE features+</div>
-              <div class="app-feature" style="font-size:0.6rem;font-weight:700;color:#00D1FF;margin-top:4px;">Upload your custom:</div>
-              <div class="app-feature"><span class="check">✓</span> Spin sound</div>
-              <div class="app-feature"><span class="check">✓</span> Winner sound</div>
-              <div class="app-feature"><span class="check">✓</span> Background music</div>
-              <div class="app-feature"><span class="check">✓</span> Backdrop picture</div>
-              <div class="app-feature"><span class="check">✓</span> Custom reel set</div>
-              <div class="app-feature"><span class="check">✓</span> Spin button</div>
-              <div class="app-feature"><span class="check">✓</span> Winner pop-up banner</div>
-              <div class="app-feature"><span class="check">✓</span> Jackpot video</div>
-            </div>
-          </div>
-        </div>
-        <div class="app-footer">
-          <span class="app-use-free">Use free now<span class="app-use-free-sub">No sign up required</span></span>
-          <div class="app-open-btn-wrap"><span style="color:#00D1FF;">Unlock All</span><img src="img/open-btn.png" alt="Open"></div>
-        </div>
+    <a href="#" class="sponsor-card" title="Advertise with us">
+      <div class="sponsor-logo">Your Logo</div>
+      <div class="sponsor-info">
+        <div class="sponsor-name">Sponsor Name</div>
+        <div class="sponsor-desc">Short description of your brand or offer.</div>
+        <div class="sponsor-cta">Visit us →</div>
       </div>
-    </div>
+    </a>
+    <a href="#" class="sponsor-card" title="Advertise with us">
+      <div class="sponsor-logo">Your Logo</div>
+      <div class="sponsor-info">
+        <div class="sponsor-name">Sponsor Name</div>
+        <div class="sponsor-desc">Short description of your brand or offer.</div>
+        <div class="sponsor-cta">Visit us →</div>
+      </div>
+    </a>
   </div>
 </section>
 
