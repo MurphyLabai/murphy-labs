@@ -243,12 +243,15 @@
     .sponsors-column { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
     .sponsor-card {
       display: flex; align-items: center; gap: 12px;
-      background: rgba(255,255,255,0.9); border: 1.5px solid rgba(196,155,48,0.35); border-radius: 14px;
+      background: var(--surface); border: 1.5px solid rgba(255,255,255,0.5); border-radius: 14px;
       padding: 12px 14px; text-decoration: none; color: inherit;
       transition: all 0.2s; cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 0 20px rgba(255,255,255,0.25), 0 0 40px rgba(200,220,255,0.1), 0 2px 8px rgba(0,0,0,0.06);
     }
-    .sponsor-card:hover { border-color: var(--gold); background: #fff; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+    @media (min-width: 901px) {
+      .sponsor-card { min-height: 300px; padding: 20px; }
+    }
+    .sponsor-card:hover { border-color: rgba(255,255,255,0.8); transform: translateY(-1px); box-shadow: 0 0 30px rgba(255,255,255,0.4), 0 0 60px rgba(200,220,255,0.2), 0 4px 14px rgba(0,0,0,0.1); }
     .sponsor-logo {
       width: 46px; height: 46px; border-radius: 10px; background: rgba(196,155,48,0.1);
       border: 2px solid var(--gold-border); flex-shrink: 0;
@@ -664,7 +667,7 @@
     }
     @media (max-width: 600px) {
       .hero-right { display: flex; flex-direction: row; flex-wrap: wrap; gap: 8px; }
-      .sponsor-card { flex: 1; min-width: 140px; }
+      .sponsor-card { flex: 1; min-width: 140px; min-height: 200px; padding: 20px; }
       .hero-stats { grid-template-columns: repeat(3, 1fr); }
       .app-card { width: 240px; } .app-thumb-wrap { height: 160px; }
       .footer-top { grid-template-columns: 1fr; }
@@ -693,7 +696,7 @@
       .hero-right { order: 4; width: 100%; padding: 14px 16px 0; flex-direction: row; flex-wrap: wrap; gap: 10px; }
       .featured-app-box { width: 100%; max-width: 100%; }
       .featured-app-box .app-thumb-wrap { height: 240px; }
-      .sponsor-card { flex: 1; min-width: 140px; }
+      .sponsor-card { flex: 1; min-width: 140px; min-height: 200px; padding: 20px; }
       .cat-section { padding: 36px 0; }
       .cat-scroll { gap: 12px; } .app-card { width: 288px; } .app-thumb-wrap { height: 192px; }
       .footer-top { grid-template-columns: 1fr 1fr; }
