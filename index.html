@@ -240,25 +240,30 @@
     .hero-stat .big { font-family: 'Audiowide', sans-serif; font-size: 1.4rem; color: var(--gold); display: block; line-height: 1; margin-bottom: 6px; }
     .hero-stat .label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
     .hero-stat.highlight { background: rgba(196,155,48,0.06); border-color: rgba(196,155,48,0.25); }
-    .sponsors-column { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
-    .sponsor-card {
-      display: flex; align-items: center; gap: 12px;
-      background: rgba(255,255,255,0.9); border: 1.5px solid rgba(196,155,48,0.35); border-radius: 14px;
-      padding: 12px 14px; text-decoration: none; color: inherit;
-      transition: all 0.2s; cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    .sponsor-carousel { width: 100%; }
+    .sponsor-item {
+      display: flex; align-items: stretch;
+      background: var(--surface); border: 1.5px solid rgba(255,255,255,0.5); border-radius: 14px;
+      padding: 0; text-decoration: none; color: inherit;
+      transition: box-shadow 0.2s, border-color 0.2s; cursor: pointer;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2), 0 0 40px rgba(200,220,255,0.08), 0 2px 8px rgba(0,0,0,0.06);
+      overflow: hidden;
     }
-    .sponsor-card:hover { border-color: var(--gold); background: #fff; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+    .sponsor-item:hover { border-color: rgba(255,255,255,0.8); box-shadow: 0 0 30px rgba(255,255,255,0.35), 0 0 60px rgba(200,220,255,0.15), 0 4px 14px rgba(0,0,0,0.1); }
     .sponsor-logo {
-      width: 46px; height: 46px; border-radius: 10px; background: rgba(196,155,48,0.1);
-      border: 2px solid var(--gold-border); flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.55rem; color: rgba(196,155,48,0.7); font-weight: 700; text-align: center; line-height: 1.2;
+      width: 140px; flex-shrink: 0; background: transparent;
+      display: flex; align-items: center; justify-content: center; padding: 14px 12px;
     }
-    .sponsor-info { flex: 1; min-width: 0; }
-    .sponsor-name { font-size: 0.75rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
-    .sponsor-desc { font-size: 0.62rem; color: var(--muted); line-height: 1.3; margin-bottom: 3px; }
-    .sponsor-cta { font-size: 0.6rem; color: var(--gold); font-weight: 700; }
+    .sponsor-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
+    .sponsor-info { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; padding: 14px 16px; gap: 6px; }
+    .sponsor-header { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); text-align: center; }
+    .sponsor-desc { font-size: 0.62rem; color: var(--text); line-height: 1.4; }
+    .sponsor-footer { font-size: 0.65rem; color: var(--gold); font-weight: 600; margin-top: 2px; }
+    @media (max-width: 900px) {
+      .sponsor-item { flex-direction: row; }
+      .sponsor-logo { width: 120px; padding: 10px 8px; }
+      .sponsor-info { padding: 10px 12px; }
+    }
 
     /* ─── CATEGORY SECTIONS ─── */
     .cat-section { padding: 56px 48px; max-width: 1300px; margin: 0 auto; }
@@ -816,22 +821,18 @@
     </div>
   </div>
   <div class="hero-right animate-in" style="animation-delay:0.2s;">
-    <a href="#" class="sponsor-card" title="Advertise with us">
-      <div class="sponsor-logo">Your Logo</div>
-      <div class="sponsor-info">
-        <div class="sponsor-name">Sponsor Name</div>
-        <div class="sponsor-desc">Short description of your brand or offer.</div>
-        <div class="sponsor-cta">Visit us →</div>
-      </div>
-    </a>
-    <a href="#" class="sponsor-card" title="Advertise with us">
-      <div class="sponsor-logo">Your Logo</div>
-      <div class="sponsor-info">
-        <div class="sponsor-name">Sponsor Name</div>
-        <div class="sponsor-desc">Short description of your brand or offer.</div>
-        <div class="sponsor-cta">Visit us →</div>
-      </div>
-    </a>
+    <div class="sponsor-carousel">
+      <a href="https://halopool.io" target="_blank" class="sponsor-item active">
+        <div class="sponsor-logo">
+          <img src="img/halo-pool-logo.png" alt="Halo Pool">
+        </div>
+        <div class="sponsor-info">
+          <div class="sponsor-header">Halo Pool</div>
+          <div class="sponsor-desc">Halo Pool lets Telegram communities launch transparent, automated, on-chain giveaways in minutes. No manual payouts. No opaque draws. Just fair, verifiable campaigns built for Web3 communities.</div>
+          <div class="sponsor-footer">halopool.io →</div>
+        </div>
+      </a>
+    </div>
   </div>
 </section>
 
