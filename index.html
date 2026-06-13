@@ -276,19 +276,23 @@
 
     /* ─── DIAMOND UPSELL CARD ─── */
     .diamond-card {
-      display: flex; flex-direction: column; align-items: center;
+      display: flex; flex-direction: column;
       background: var(--surface); border: 1.5px solid rgba(0,209,255,0.4); border-radius: 14px;
       padding: 20px 16px; text-decoration: none; color: inherit;
       box-shadow: 0 0 20px rgba(0,209,255,0.15), 0 0 40px rgba(0,209,255,0.05), 0 2px 8px rgba(0,0,0,0.06);
-      transition: all 0.2s; cursor: pointer; min-height: 300px; width: 100%;
+      transition: all 0.2s; cursor: pointer; min-height: 300px; width: 100%; align-items: center;
     }
     .diamond-card:hover { border-color: rgba(0,209,255,0.7); transform: translateY(-1px); box-shadow: 0 0 30px rgba(0,209,255,0.25), 0 0 60px rgba(0,209,255,0.1), 0 4px 14px rgba(0,0,0,0.1); }
-    .diamond-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-    .diamond-header span { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; color: #00D1FF; }
-    .diamond-features { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
-    .diamond-feature { font-size: 0.85rem; color: var(--text); font-weight: 500; }
-    .diamond-cta { font-size: 1.1rem; font-weight: 700; color: #00D1FF; margin-bottom: 8px; }
-    .diamond-note { font-size: 0.65rem; color: var(--text-secondary); }
+    .upsell-section { display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center; }
+    .upsell-label { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 700; color: #00D1FF; text-transform: uppercase; letter-spacing: 1px; }
+    .upsell-uses { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+    .upsell-uses-row { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; width: 100%; }
+    .upsell-uses span { font-size: 0.8rem; color: var(--text); font-weight: 500; }
+    .upsell-divider { height: 1px; background: rgba(0,209,255,0.2); margin: 12px 0; }
+    .upsell-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .upsell-stat { display: flex; flex-direction: column; align-items: center; }
+    .stat-num { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--gold); }
+    .stat-label { font-size: 0.65rem; color: var(--text-secondary); }
 
     /* ─── CATEGORY SECTIONS ─── */
     .cat-section { padding: 56px 48px; max-width: 1300px; margin: 0 auto; }
@@ -852,18 +856,36 @@
     </div>
   </div>
   <div class="hero-right animate-in" style="animation-delay:0.2s;">
-    <div class="diamond-card" onclick="openAuth('register')">
-      <div class="diamond-header">
-        <img src="img/open-btn.png" alt="Diamond" style="width:40px;height:40px;object-fit:contain;">
-        <span>Go Diamond — $7/month</span>
+    <div class="diamond-card">
+      <div class="upsell-section">
+        <div class="upsell-label">Perfect for:</div>
+        <div class="upsell-uses">
+          <div class="upsell-uses-row">
+            <span>🎲 D&D & Tabletop RPGs</span>
+            <span>🎁 Community Giveaways</span>
+          </div>
+          <div class="upsell-uses-row">
+            <span>🃏 Card Game Nights</span>
+            <span>🪙 Decision Making</span>
+          </div>
+          <div class="upsell-uses-row">
+            <span>🎰 Game Simulations</span>
+            <span>⚔️ Party Games</span>
+          </div>
+        </div>
       </div>
-      <div class="diamond-features">
-        <div class="diamond-feature">✓ Custom music uploads</div>
-        <div class="diamond-feature">✓ Video & image themes</div>
-        <div class="diamond-feature">✓ All 7 apps unlocked</div>
+      <div class="upsell-divider"></div>
+      <div class="upsell-section">
+        <div class="upsell-label">Join the community:</div>
+        <div class="upsell-stats">
+          <div class="upsell-stat"><span class="stat-num">2.4M+</span><span class="stat-label">Dice Rolled</span></div>
+          <div class="upsell-stat"><span class="stat-num">890K+</span><span class="stat-label">Coin Tosses</span></div>
+          <div class="upsell-stat"><span class="stat-num">500K+</span><span class="stat-label">Cards Flipped</span></div>
+          <div class="upsell-stat"><span class="stat-num">50K+</span><span class="stat-label">Winners Picked</span></div>
+          <div class="upsell-stat"><span class="stat-num">75K+</span><span class="stat-label">Names Extracted</span></div>
+          <div class="upsell-stat"><span class="stat-num">200K+</span><span class="stat-label">Sessions Started</span></div>
+        </div>
       </div>
-      <div class="diamond-cta">Unlock All →</div>
-      <div class="diamond-note">No commitments · Cancel anytime</div>
     </div>
   </div>
 </section>
