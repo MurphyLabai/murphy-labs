@@ -378,7 +378,10 @@
     .app-body { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; }
     .app-name { display: flex; align-items: center; justify-content: center; font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 4px; line-height: 1.3; }
     .app-sub { font-size: 0.75rem; color: var(--text); text-align: center; margin-bottom: 8px; font-weight: 500; }
-    .app-features { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; max-height: 150px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--card-border) transparent; flex: 1; }
+    .app-features { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; max-height: 150px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(124,111,255,0.4) transparent; flex: 1; }
+    .app-features::-webkit-scrollbar { width: 4px; }
+    .app-features::-webkit-scrollbar-track { background: transparent; }
+    .app-features::-webkit-scrollbar-thumb { background: rgba(124,111,255,0.4); border-radius: 2px; }
     .app-features.tall { max-height: 280px; }
     .app-features::-webkit-scrollbar { width: 4px; }
     .app-features::-webkit-scrollbar-track { background: transparent; }
@@ -527,8 +530,11 @@
     .info-box-close:hover { color: var(--text); }
     .info-box-text {
       color: var(--text); font-size: 0.85rem; line-height: 1.6;
-      max-height: 320px; overflow-y: auto;
+      max-height: 320px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(124,111,255,0.4) transparent;
     }
+    .info-box-text::-webkit-scrollbar { width: 4px; }
+    .info-box-text::-webkit-scrollbar-track { background: transparent; }
+    .info-box-text::-webkit-scrollbar-thumb { background: rgba(124,111,255,0.4); border-radius: 2px; }
     .auth-box {
       background: var(--surface); border-radius: 20px; padding: 40px 44px;
       width: 100%; max-width: 420px; position: relative;
