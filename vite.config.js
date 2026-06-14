@@ -19,6 +19,7 @@ export default defineConfig({
         'pages/faq': resolve(__dirname, 'pages/faq.html'),
         'pages/terms': resolve(__dirname, 'pages/terms.html'),
         'pages/privacy': resolve(__dirname, 'pages/privacy.html'),
+        'pages/pricing': resolve(__dirname, 'pages/pricing.html'),
       },
     },
   },
